@@ -1,0 +1,19 @@
+{
+  "name": "servable",
+  "version": "0.0.0",
+  "description": "From scratch observable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maniator/servable.git"
+  },
+  "author": "Neal Lubin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maniator/servable/issues"
+  },
+  "homepage": "https://github.com/maniator/servable#readme"
+}
