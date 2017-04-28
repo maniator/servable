@@ -3,7 +3,8 @@ const helpers = require('./helpers');
 
 module.exports = {
     entry: {
-      'index': './src/index.js'
+      'index': './src/index.js',
+      // 'test': './src/test.js'
     },
 
     output: {

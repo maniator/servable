@@ -1,12 +1,12 @@
 {
   "name": "servable",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "From scratch observable",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "prepublish": "npm run build",
-    "build": "rm -rf dist && webpack --config config/webpack.common.js"
+    "build": "rm -rf dist && webpack --config config/webpack.common.js",
+    "release": "node release.js"
   },
   "repository": {
     "type": "git",
