@@ -1,1 +1,1 @@
-export { Observable } from './servable';
+export * from './servable';
