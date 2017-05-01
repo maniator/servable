@@ -1,32 +1,16 @@
 const { Observable } = Servable;
 
-const countObservable$ = new Observable(function ({ next, error, complete }) {
-  let number = 0;
-  
-  const runNext = function () {
-    next(number+=1);
-    
-    if (number < 5) {
-      setTimeout(runNext, 1000);
-    } else {
-      complete();
-    }
-  };
-  
-  runNext();
-  
-  // can (optionally) return a function to run when the observer is unsubscribed to
-  return function () {
-    console.log('I AM UNSUBSCRIBED');
-  };
-}); // function will not run until subscribed to
+const countObservable$ = Observable.interval(1000, 1);
 
-const subscription = countObservable$
-  .do(console.log.bind(console.log, 'Before map'))
-  .map((n) => n * 4)
-  .do(console.log.bind(console.log, 'Before filter'))
+const countSubscription = countObservable$
+  .do((value) => {
+    if (value > 10) {
+      console.log('Value is greater than 10, so unsubscribe');
+      countSubscription.unsubscribe();
+    }
+  })
+  .map((n) => n * 5)
   .filter((n) => n > 10)
-  .do(console.log.bind(console.log, 'After both'))
   .subscribe({
     next (number) {
       console.log('NEXT NUMBER: ', number);
@@ -40,3 +24,13 @@ const subscription = countObservable$
       console.log('I AM COMPLETE');
     }
   });
+
+// test event binding
+const inputObservable$ = Observable.fromEvent('input', document.getElementById('myInput'));
+const div = document.getElementById('myText');
+
+inputObservable$
+  .map((event, element) => element.value)
+  .map((text) => text.split('').reverse().join(''))
+  .do((text) => div.textContent = text)
+  .subscribe();

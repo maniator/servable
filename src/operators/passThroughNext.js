@@ -1,14 +1,18 @@
 import { Observable } from '../Observable';
 
-export const passThroughNext = function (source$, nextFunction) {
-  return new Observable(({next, error, complete}) => {
+const noop = () => {};
+
+export const passThroughNext = function (source$, nextFunction, dispose = noop) {
+  return new Observable((observer) => {
     const subscription = source$.subscribe({
-      next: nextFunction.bind(this, next),
-      error,
-      complete,
+      next: nextFunction.bind(this, observer),
+      error: observer.error,
+      complete: observer.complete,
     });
     
     return function () {
+      dispose();
+      
       subscription.unsubscribe();
     };
   });
