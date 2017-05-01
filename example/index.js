@@ -21,16 +21,22 @@ const countObservable$ = new Observable(function ({ next, error, complete }) {
   };
 }); // function will not run until subscribed to
 
-const subscription = countObservable$.subscribe({
-  next (number) {
-    console.log('NEXT NUMBER: ', number);
-  },
-  
-  error (errors) {
-    console.warn('I HAVE ERRORS', errors)
-  },
-  
-  complete () {
-    console.log('I AM COMPLETE');
-  }
-});
+const subscription = countObservable$
+  .do(console.log.bind(console.log, 'Before map'))
+  .map((n) => n * 4)
+  .do(console.log.bind(console.log, 'Before filter'))
+  .filter((n) => n > 10)
+  .do(console.log.bind(console.log, 'After both'))
+  .subscribe({
+    next (number) {
+      console.log('NEXT NUMBER: ', number);
+    },
+    
+    error (errors) {
+      console.warn('I HAVE ERRORS', errors)
+    },
+    
+    complete () {
+      console.log('I AM COMPLETE');
+    }
+  });

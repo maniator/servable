@@ -18,6 +18,7 @@ export class Subscription {
       this.observer.next = noop;
       this.observer.error = noop;
       this.observer.complete = noop;
+      this.dispose = noop;
     })();
   }
   
