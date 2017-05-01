@@ -1,4 +1,4 @@
-const noop = () => {};
+import { noop } from './utilities';
 
 export class Subscription {
   constructor (callback, observer) {

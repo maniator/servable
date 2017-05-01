@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const helpers = require('./helpers');
+const pkg = require('../package.json');
 
 module.exports = {
     entry: {
@@ -42,4 +43,10 @@ module.exports = {
             },
         ]
     },
+    
+    plugins: [
+        new webpack.BannerPlugin(`servable v${pkg.version}
+${pkg.homepage}
+@author ${pkg.author}`)
+    ]
 };

@@ -3,12 +3,7 @@ const { Observable } = Servable;
 const countObservable$ = Observable.interval(1000, 1);
 
 const countSubscription = countObservable$
-  .do((value) => {
-    if (value > 10) {
-      console.log('Value is greater than 10, so unsubscribe');
-      countSubscription.unsubscribe();
-    }
-  })
+  .take(10)
   .map((n) => n * 5)
   .filter((n) => n > 10)
   .subscribe({

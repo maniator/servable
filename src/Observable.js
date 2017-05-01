@@ -1,6 +1,5 @@
 import { Subscription } from './Subscription';
-
-const noop = () => {};
+import { noop } from './utilities';
 
 export class Observable {
   constructor (observerCallback) {

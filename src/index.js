@@ -6,6 +6,8 @@ export * from './operators/map';
 export * from './operators/filter';
 export * from './operators/do';
 export * from './operators/debounceTime';
+export * from './operators/take';
+export * from './operators/first';
 
 // add on observable types
 export * from './observables/fromEvent';

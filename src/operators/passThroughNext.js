@@ -1,6 +1,5 @@
 import { Observable } from '../Observable';
-
-const noop = () => {};
+import { noop } from '../utilities';
 
 export const passThroughNext = function (source$, nextFunction, dispose = noop) {
   return new Observable((observer) => {
