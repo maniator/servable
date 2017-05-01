@@ -1,8 +1,9 @@
 import { Observable } from '../Observable';
+import { isPromise } from '../utilities';
 
 export const fromPromise = function (promise) {
   return new Observable(function ({ next, complete, error }) {
-    if (promise instanceof Promise) {
+    if (isPromise(promise)) {
       promise.then(function (...values) {
         next(...values);
         complete();
