@@ -2,7 +2,7 @@
 
 Servable is an implementation of a "simple" observable
 
-###To install run:
+## To install run:
 
 ```
     npm i servable --save
