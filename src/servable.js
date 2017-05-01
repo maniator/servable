@@ -11,12 +11,24 @@ export class Subscription {
   }
   
   unsubscribe () {
-    this.dispose();
-    
-    this.isComplete = true;
-    this.observer.next = noop;
-    this.observer.error = noop;
-    this.observer.complete = noop;
+    this.catchErrors(() => {
+      this.dispose();
+  
+      this.isComplete = true;
+      this.observer.next = noop;
+      this.observer.error = noop;
+      this.observer.complete = noop;
+    })();
+  }
+  
+  catchErrors (callback) {
+    return (...args) => {
+      try {
+        callback(...args);
+      } catch (errors) {
+        this.observer.error(errors);
+      }
+    };
   }
   
   wrapObserver (observer) {
@@ -29,25 +41,25 @@ export class Subscription {
     
     const returnObserver = {};
     
-    returnObserver.next = (...args) => {
+    returnObserver.next = this.catchErrors((...args) => {
       if (!this.isComplete) {
         next(...args);
       } else {
         // overwrite the next so it cannot run again if complete
         next = noop;
       }
-    };
+    });
   
-    returnObserver.error = (...errors) => {
+    returnObserver.error = this.catchErrors((...errors) => {
       if (!this.isComplete) {
         error(...errors);
       } else {
         // overwrite the error so it cannot run again if complete
         error = noop;
       }
-    };
+    });
     
-    returnObserver.complete = () => {
+    returnObserver.complete = this.catchErrors(() => {
       if (!this.isComplete) {
         this.unsubscribe();
         complete();
@@ -56,21 +68,19 @@ export class Subscription {
       // overwrite the complete so it doesnt run again
       complete = noop;
       this.isComplete = true;
-    };
+    });
     
     return returnObserver;
   }
   
   callWithObserver (callback) {
-    try {
+    this.catchErrors(() => {
       const response = callback(this.observer);
-      
+  
       if (typeof response === 'function') {
         this.dispose = response;
       }
-    } catch (error) {
-      this.observer.error(error);
-    }
+    })();
   }
 }
 

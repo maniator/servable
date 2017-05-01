@@ -6,7 +6,7 @@ const countObservable$ = new Observable(function ({ next, error, complete }) {
   const runNext = function () {
     next(number+=1);
     
-    if (number < 10) {
+    if (number < 5) {
       setTimeout(runNext, 1000);
     } else {
       complete();
@@ -24,6 +24,10 @@ const countObservable$ = new Observable(function ({ next, error, complete }) {
 const subscription = countObservable$.subscribe({
   next (number) {
     console.log('NEXT NUMBER: ', number);
+  },
+  
+  error (errors) {
+    console.warn('I HAVE ERRORS', errors)
   },
   
   complete () {
