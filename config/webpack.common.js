@@ -13,6 +13,7 @@ module.exports = {
         chunkFilename: '[id].chunk.js',
         libraryTarget: 'umd',
         library: 'Servable',
+        umdNamedDefine: true,
     },
 
     performance: {
