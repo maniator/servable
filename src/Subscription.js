@@ -13,7 +13,7 @@ export class Subscription {
   unsubscribe () {
     this.catchErrors(() => {
       this.dispose();
-  
+      
       this.isComplete = true;
       this.observer.next = noop;
       this.observer.error = noop;
@@ -49,7 +49,7 @@ export class Subscription {
         next = noop;
       }
     });
-  
+    
     returnObserver.error = this.catchErrors((...errors) => {
       if (!this.isComplete) {
         error(...errors);
@@ -76,20 +76,10 @@ export class Subscription {
   callWithObserver (callback) {
     this.catchErrors(() => {
       const response = callback(this.observer);
-  
+      
       if (typeof response === 'function') {
         this.dispose = response;
       }
     })();
-  }
-}
-
-export class Observable {
-  constructor (observerCallback) {
-    this.observerCallback = observerCallback;
-  }
-  
-  subscribe (next = noop, error = noop, complete = noop) {
-    return new Subscription(this.observerCallback, { next, error, complete });
   }
 }
