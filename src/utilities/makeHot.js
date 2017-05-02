@@ -17,3 +17,7 @@ export const makeHot = (cold) => {
     };
   });
 };
+
+Observable.prototype.makeHot = function () {
+  return makeHot(this);
+};

@@ -1,5 +1,8 @@
 export * from './Subscription';
 export * from './Observable';
+export * from './Subject';
+
+export * from './utilities/makeHot';
 
 // add on operators
 export * from './operators/map';
