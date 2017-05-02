@@ -1,6 +1,6 @@
 {
   "name": "servable",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "From scratch observable",
   "main": "dist/index.js",
   "scripts": {
