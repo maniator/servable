@@ -51,14 +51,14 @@ export class Subscription {
       }
     });
     
-    returnObserver.error = this.catchErrors((...errors) => {
+    returnObserver.error = (...errors) => {
       if (!this.isComplete) {
         error(...errors);
       } else {
         // overwrite the error so it cannot run again if complete
         error = noop;
       }
-    });
+    };
     
     returnObserver.complete = this.catchErrors(() => {
       if (!this.isComplete) {
@@ -72,6 +72,18 @@ export class Subscription {
     });
     
     return returnObserver;
+  }
+  
+  next (...args) {
+    return this.observer.next(...args);
+  }
+  
+  error (...errors) {
+    return this.observer.error(...errors);
+  }
+  
+  complete () {
+    return this.observer.complete();
   }
   
   callWithObserver (callback) {

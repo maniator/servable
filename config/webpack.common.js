@@ -6,6 +6,8 @@ module.exports = {
     entry: {
       'index': './src/index.js',
     },
+    
+    devtool: 'source-map',
 
     output: {
         path: helpers.root('dist'),
