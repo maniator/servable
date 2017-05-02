@@ -1,9 +1,6 @@
 import { Subscription } from './Subscription';
 import { noop } from './utilities';
 
-/**
- * @todo better performant way to remove subscriptions that are complete from the loop
- */
 export class Subject {
   constructor () {
     this.next = this.next.bind(this);
@@ -21,33 +18,32 @@ export class Subject {
     return subscription;
   }
   
+  cleanup (callback) {
+    this.subscriptionList = this.subscriptionList.filter((subscription) => {
+      if (!subscription.isComplete) {
+        callback(subscription);
+        return true;
+      }
+      
+      return false;
+    });
+  }
+  
   next (...args) {
-    if (this.subscriptionList) {
-      this.subscriptionList.forEach((subscription) => {
-        if (!subscription.isComplete) {
-          subscription.next(...args);
-        }
-      });
-    }
+    this.cleanup((subscription) => {
+        subscription.next(...args);
+    });
   }
   
   error (...errors) {
-    if (this.subscriptionList) {
-      this.subscriptionList.forEach((subscription) => {
-        if (!subscription.isComplete) {
-          subscription.error(...errors);
-        }
-      });
-    }
+    this.cleanup((subscription) => {
+      subscription.error(...errors);
+    });
   }
   
   complete () {
-    if (this.subscriptionList) {
-      this.subscriptionList.forEach((subscription) => {
-        if (!subscription.isComplete) {
-          subscription.complete();
-        }
-      });
-    }
+    this.cleanup((subscription) => {
+      subscription.complete();
+    });
   }
 }
