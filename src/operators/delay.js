@@ -1,0 +1,21 @@
+import { Observable } from '../Observable';
+
+export const delay = function (source$, time) {
+  return Observable.create((observer) => {
+    let subscription;
+    const timerId = setTimeout(() => {
+      subscription = source$.subscribe(observer.next, observer.error, observer.complete);
+    }, time);
+    
+    return () => {
+      clearTimeout(timerId);
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
+  });
+};
+
+Observable.prototype.delay = function (time) {
+  return delay(this, time);
+};
