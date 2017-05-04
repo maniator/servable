@@ -21,20 +21,18 @@ const { Observable } = Servable;
 //   });
 
 // test event binding
-const inputObservable$ = Observable.fromEvent('input', document.getElementById('myInput'));
+const inputObservable$ = Observable.fromEvent('input', document.getElementById('myInput'), (event) => event.currentTarget.value);
 const divReverse = document.getElementById('myTextReverse');
 const div = document.getElementById('myText');
 
 console.log(inputObservable$);
 
 inputObservable$
-  .map((event, element) => element.value)
   .map((text) => text.split('').reverse().join(''))
   .do((text) => divReverse.textContent = text)
   .subscribe();
 
 inputObservable$
-  .map((event, element) => element.value)
   .do((text) => div.textContent = text)
   .subscribe();
 

@@ -11,6 +11,7 @@ export const toPromise = function (source$) {
     return first(source$).subscribe({
       next: respond,
       error: reject,
+      complete: respond,
     });
   });
 };

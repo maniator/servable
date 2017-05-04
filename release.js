@@ -48,16 +48,12 @@ inquirer.prompt(questions).then(function(answers) {
     bumpVersion('package.json', pkg, dryRun) &&
     run('npm run build', dryRun) &&
     run('git add .', dryRun) &&
-    run('git add -f dist', dryRun) &&
     run('git commit -m "' + newVerison + '"', dryRun) &&
     run('git push', dryRun) &&
     run('git tag -a ' + newVerison + ' -m "v' + newVerison + '"', dryRun) &&
     run('git push origin --tags', dryRun) &&
-    run('npm publish', dryRun) &&
-    run('git rm -r dist', dryRun) &&
-    run('git commit -m "cleanup repository after release"', dryRun) &&
-    run('git push', dryRun)
-})
+    run('npm publish', dryRun)
+});
 
 function bumpVersion(fileName, obj, dry) {
   console.log('Bumping version in `' + fileName + '` to ' + obj.version)
