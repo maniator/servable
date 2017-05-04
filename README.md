@@ -57,7 +57,7 @@ I AM COMPLETE // same time as previous line
 
  - will map each value to a new value using the callback
     
-`.filter(<filterCallback)` 
+`.filter(<filterCallback>)` 
 
 - will filter out values that you do not want to subscribe to
     
@@ -104,7 +104,7 @@ I AM COMPLETE // same time as previous line
 - will create an observable that will listen for an event on a DOM element
 - there is also an optional mappCallback that can be used to map the event that comes through the next observer function
 
-`.fromPromise(promise)`
+`.fromPromise(<promise>)`
 
 - turns a promise into an observable that emits the value of the promise and then completes
 
