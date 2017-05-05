@@ -35,4 +35,3 @@ inputObservable$
 inputObservable$
   .do((text) => div.textContent = text)
   .subscribe();
-
