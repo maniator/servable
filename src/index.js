@@ -15,6 +15,8 @@ export * from './operators/first';
 export * from './operators/toPromise';
 export * from './operators/flatMap';
 export * from './operators/switchMap';
+export * from './operators/scan';
+export * from './operators/reduce';
 
 // add on observable types
 export * from './observables/fromEvent';
