@@ -3,8 +3,6 @@ import { noop } from './utilities';
 
 export class Subscription {
   constructor (callback, observer) {
-    this.dispose = noop;
-    
     this.observer = new Observer(observer);
     
     this.observer.use(callback);
