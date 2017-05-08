@@ -17,6 +17,9 @@ export * from './operators/flatMap';
 export * from './operators/switchMap';
 export * from './operators/scan';
 export * from './operators/reduce';
+export * from './operators/concat';
+export * from './operators/count';
+export * from './operators/sum';
 
 // add on observable types
 export * from './observables/fromEvent';
