@@ -1,5 +1,4 @@
 import { Subscription } from './Subscription';
-import { noop } from './utilities';
 
 export class Subject {
   constructor () {
@@ -10,8 +9,8 @@ export class Subject {
     this.subscriptionList = [];
   }
   
-  subscribe (next = noop, error = noop, complete = noop) {
-    const subscription = new Subscription(noop, {next, error, complete});
+  subscribe (observer) {
+    const subscription = Subscription.createSimple(observer);
     
     this.subscriptionList.push(subscription);
     
@@ -31,19 +30,19 @@ export class Subject {
   
   next (...args) {
     this.cleanup((subscription) => {
-        subscription.next(...args);
+        subscription.onNext(...args);
     });
   }
   
   error (...errors) {
     this.cleanup((subscription) => {
-      subscription.error(...errors);
+      subscription.onError(...errors);
     });
   }
   
   complete () {
     this.cleanup((subscription) => {
-      subscription.complete();
+      subscription.onComplete();
     });
   }
 }
