@@ -10,6 +10,10 @@ export class Subscription {
     this.observer.use(callback);
   }
   
+  static createSimple (observer) {
+    return new Subscription(noop, observer);
+  }
+  
   unsubscribe () {
     this.observer.cleanup();
   }

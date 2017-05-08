@@ -1,6 +1,7 @@
 export * from './Subscription';
 export * from './Observable';
 export * from './Subject';
+export * from './Observer';
 
 export * from './utilities/makeHot';
 
