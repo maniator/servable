@@ -22,7 +22,7 @@ export class Observer {
   catchErrors (callback) {
     return (...args) => {
       try {
-        callback(...args);
+        return callback(...args);
       } catch (errors) {
         this.onError(errors);
       }
@@ -47,37 +47,38 @@ export class Observer {
   
   setupObserver ({ next = noop, error = noop, complete = noop }) {
     // assumes that an object was passed as first value to subscription
-    if (typeof next !== 'function') {
+    if (typeof next !== 'function' && typeof next === 'object') {
       return this.setupObserver(next);
     }
   
     this.onNext = this.catchErrors((...args) => {
-      if (!this.isComplete) {
-        next(...args);
-      } else {
+      if (this.isComplete) {
         // overwrite the next so it cannot run again if complete
         next = noop;
       }
+      
+      return next(...args);
     });
   
     this.onError = (...errors) => {
-      if (!this.isComplete) {
-        error(...errors);
-      } else {
+      if (this.isComplete) {
         // overwrite the error so it cannot run again if complete
         error = noop;
       }
+      
+      return error(...errors);
     };
   
     this.onComplete = this.catchErrors(() => {
-      if (!this.isComplete) {
+      if (this.isComplete) {
+        // overwrite the complete so it doesnt run again
+        complete = noop;
+        this.isComplete = true;
+      } else {
         this.cleanup();
-        complete();
       }
-    
-      // overwrite the complete so it doesnt run again
-      complete = noop;
-      this.isComplete = true;
+      
+      return complete();
     });
   
     return this;
