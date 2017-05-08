@@ -31,7 +31,11 @@ export class Observer {
   
   use (callback) {
     this.catchErrors(() => {
-      const response = callback(this);
+      const response = callback({
+        next: (...args) => this.onNext(...args),
+        error: (...errors) => this.onError(...errors),
+        complete: () => this.onComplete(),
+      });
       
       if (typeof response === 'function') {
         this.dispose = response;
@@ -77,17 +81,5 @@ export class Observer {
     });
   
     return this;
-  }
-  
-  get next () {
-    return this.onNext;
-  }
-  
-  get error () {
-    return this.onError;
-  }
-  
-  get complete () {
-    return this.onComplete;
   }
 }
