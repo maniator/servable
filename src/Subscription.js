@@ -7,16 +7,11 @@ export class Subscription {
     
     this.observer = new Observer(observer);
     
-    this.callWithObserver(callback);
+    this.observer.use(callback);
   }
   
   unsubscribe () {
-    this.observer.catchErrors(() => {
-      this.dispose();
-      
-      this.observer.cleanup();
-      this.dispose = noop;
-    })();
+    this.observer.cleanup();
   }
   
   get isComplete () {
@@ -33,15 +28,5 @@ export class Subscription {
   
   complete () {
     return this.observer.complete();
-  }
-  
-  callWithObserver (callback) {
-    this.observer.catchErrors(() => {
-      const response = callback(this.observer);
-      
-      if (typeof response === 'function') {
-        this.dispose = response;
-      }
-    })();
   }
 }

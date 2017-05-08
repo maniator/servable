@@ -3,14 +3,20 @@ import { noop } from './utilities';
 export class Observer {
   constructor (observer) {
     this.isComplete = false;
+    this.dispose = noop;
     
     this.setupObserver(observer);
   }
   
   cleanup () {
-    this.onNext = noop;
-    this.onError = noop;
-    this.onComplete = noop;
+    this.catchErrors(() => {
+      this.dispose();
+  
+      this.onNext = noop;
+      this.onError = noop;
+      this.onComplete = noop;
+      this.dispose = noop;
+    })();
   }
   
   catchErrors (callback) {
@@ -23,8 +29,16 @@ export class Observer {
     };
   }
   
-  setComplete () {
-    this.isComplete = true;
+  use (callback) {
+    this.catchErrors(() => {
+      const response = callback(this);
+      
+      if (typeof response === 'function') {
+        this.dispose = response;
+      } else {
+        this.dispose = noop;
+      }
+    })();
   }
   
   setupObserver ({ next = noop, error = noop, complete = noop }) {
