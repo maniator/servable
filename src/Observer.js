@@ -1,7 +1,7 @@
 import { noop } from './utilities';
 
 export class Observer {
-  constructor (observer) {
+  constructor (observer = {}) {
     this.isComplete = false;
     this.dispose = noop;
     
