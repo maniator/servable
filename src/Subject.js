@@ -31,19 +31,19 @@ export class Subject {
   
   next (...args) {
     this.cleanup((subscription) => {
-        subscription.next(...args);
+        subscription.onNext(...args);
     });
   }
   
   error (...errors) {
     this.cleanup((subscription) => {
-      subscription.error(...errors);
+      subscription.onError(...errors);
     });
   }
   
   complete () {
     this.cleanup((subscription) => {
-      subscription.complete();
+      subscription.onComplete();
     });
   }
 }

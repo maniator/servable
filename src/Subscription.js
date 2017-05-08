@@ -18,15 +18,15 @@ export class Subscription {
     return this.observer.isComplete;
   }
   
-  get next () {
-    return this.observer.next;
+  get onNext () {
+    return this.observer.onNext;
   }
   
-  get error () {
-    return this.observer.error;
+  get onError () {
+    return this.observer.onError;
   }
   
-  get complete () {
-    return this.observer.complete;
+  get onComplete () {
+    return this.observer.onComplete;
   }
 }
