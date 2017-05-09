@@ -2,7 +2,7 @@ import { Observer } from './Observer';
 import { noop } from './utilities';
 
 export class Subscription {
-  constructor (callback, observer) {
+  constructor (callback = noop, observer = {}) {
     this.observer = new Observer(observer);
     
     this.observer.use(callback);
