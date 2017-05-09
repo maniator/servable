@@ -1,24 +1,12 @@
 import { Observable } from '../Observable';
-import { isObservable } from '../utilities';
-import '../observables/of';
-import './map';
+import { passThroughNextObservable } from './passThroughNextObservable';
 
 export const switchMap = function (source$, mapCallback) {
   return new Observable((observer) => {
     let currentSubscription;
     let nextSubscription;
   
-    currentSubscription = source$
-      .map(mapCallback)
-      .map((nextValue) => {
-        let nextValue$ = nextValue;
-        
-        if (!isObservable(nextValue$)) {
-          nextValue$ = Observable.of(nextValue$);
-        }
-        
-        return nextValue$
-      })
+    currentSubscription = passThroughNextObservable(source$, mapCallback)
       .subscribe((nextValue$) => {
         // unsubscribe to the previous subscription if a new value comes in
         if (nextSubscription) {

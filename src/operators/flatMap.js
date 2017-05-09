@@ -1,7 +1,5 @@
 import { Observable } from '../Observable';
-import { isObservable } from '../utilities';
-import '../observables/of';
-import './map';
+import { passThroughNextObservable } from './passThroughNextObservable';
 
 export const flatMap = function (source$, mapCallback) {
   return new Observable((observer) => {
@@ -18,17 +16,7 @@ export const flatMap = function (source$, mapCallback) {
       }
     };
     
-    subscription = source$
-      .map(mapCallback)
-      .map((nextValue) => {
-        let nextValue$ = nextValue;
-    
-        if (!isObservable(nextValue$)) {
-          nextValue$ = Observable.of(nextValue$);
-        }
-    
-        return nextValue$
-      })
+    subscription = passThroughNextObservable(source$, mapCallback)
       .subscribe((nextValue$) => {
         const nextSubscription = nextValue$.subscribe(
           observer.next,

@@ -1,5 +1,4 @@
-import { Subscription } from './Subscription';
-import { noop } from './utilities';
+import {Subscription} from './Subscription';
 
 export class Subject {
   constructor () {
@@ -7,43 +6,59 @@ export class Subject {
     this.error = this.error.bind(this);
     this.complete = this.complete.bind(this);
     
-    this.subscriptionList = [];
+    this.observers = [];
   }
   
-  subscribe (next = noop, error = noop, complete = noop) {
-    const subscription = new Subscription(noop, {next, error, complete});
+  subscribe (observer) {
+    const subscription = Subscription.createSimple(observer);
     
-    this.subscriptionList.push(subscription);
+    this.observers.push(subscription.observer);
     
     return subscription;
   }
   
+  unsubscribe () {
+    this
+      .cleanup((observer) => {
+        observer.cleanup();
+        
+        return false;
+      });
+  }
+  
   cleanup (callback) {
-    this.subscriptionList = this.subscriptionList.filter((subscription) => {
-      if (!subscription.isComplete) {
-        callback(subscription);
+    this.observers = this.observers.filter((observer) => {
+      if (!observer.isComplete) {
+        const ret = callback(observer);
+        
+        if (typeof ret === 'boolean') {
+          return ret;
+        }
+        
         return true;
       }
       
       return false;
     });
+    
+    return this;
   }
   
   next (...args) {
-    this.cleanup((subscription) => {
-        subscription.next(...args);
+    this.cleanup((observer) => {
+        observer.onNext(...args);
     });
   }
   
   error (...errors) {
-    this.cleanup((subscription) => {
-      subscription.error(...errors);
+    this.cleanup((observer) => {
+      observer.onError(...errors);
     });
   }
   
   complete () {
-    this.cleanup((subscription) => {
-      subscription.complete();
+    this.cleanup((observer) => {
+      observer.onComplete();
     });
   }
 }

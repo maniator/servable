@@ -6,6 +6,10 @@ export class Observable {
     this.observerCallback = observerCallback;
   }
   
+  static create (observerCallback) {
+    return new Observable(observerCallback);
+  }
+  
   subscribe (next = noop, error = noop, complete = noop) {
     return new Subscription(this.observerCallback, { next, error, complete });
   }

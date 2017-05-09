@@ -1,7 +1,7 @@
 import { Observable } from '../Observable';
 
 export const delay = function (source$, time) {
-  return Observable.create((observer) => {
+  return new Observable((observer) => {
     let subscription;
     const timerId = setTimeout(() => {
       subscription = source$.subscribe(observer.next, observer.error, observer.complete);

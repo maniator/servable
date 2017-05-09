@@ -1,6 +1,7 @@
 export * from './Subscription';
 export * from './Observable';
 export * from './Subject';
+export * from './Observer';
 
 export * from './utilities/makeHot';
 
@@ -17,6 +18,13 @@ export * from './operators/flatMap';
 export * from './operators/switchMap';
 export * from './operators/scan';
 export * from './operators/reduce';
+export * from './operators/concat';
+export * from './operators/combineLatest';
+export * from './operators/count';
+export * from './operators/sum';
+export * from './operators/max';
+export * from './operators/min';
+export * from './operators/average';
 
 // add on observable types
 export * from './observables/fromEvent';
