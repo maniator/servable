@@ -19,6 +19,8 @@ export class Observer {
       
       this.isComplete = true;
     })();
+    
+    return this;
   }
   
   catchErrors (callback) {
@@ -32,7 +34,7 @@ export class Observer {
   }
   
   use (callback) {
-    this.catchErrors(() => {
+    return this.catchErrors(() => {
       const response = callback({
         next: (...args) => this.onNext(...args),
         error: (...errors) => this.onError(...errors),
@@ -44,6 +46,8 @@ export class Observer {
       } else {
         this.dispose = noop;
       }
+      
+      return this.dispose;
     })();
   }
   
@@ -54,33 +58,22 @@ export class Observer {
     }
   
     this.onNext = this.catchErrors((...args) => {
-      if (this.isComplete) {
-        // overwrite the next so it cannot run again if complete
-        next = noop;
+      if (!this.isComplete) {
+        return next(...args);
       }
-      
-      return next(...args);
     });
   
     this.onError = (...errors) => {
-      if (this.isComplete) {
-        // overwrite the error so it cannot run again if complete
-        error = noop;
+      if (!this.isComplete) {
+        return error(...errors);
       }
-      
-      return error(...errors);
     };
   
     this.onComplete = this.catchErrors(() => {
-      if (this.isComplete) {
-        // overwrite the complete so it doesnt run again
-        complete = noop;
-        this.isComplete = true;
-      } else {
+      if (!this.isComplete) {
         this.cleanup();
+        return complete();
       }
-      
-      return complete();
     });
   
     return this;
