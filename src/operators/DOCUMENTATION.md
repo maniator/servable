@@ -20,6 +20,15 @@ These methods called by doing: `observableInstance$.<pluginFunction>`
 `.first([<callback>])` 
 
  - this is an alias for `.take(1[, <callback>])`
+    
+`.scan(scanCallback[, startValue])` 
+
+ - will go through each value in array and will increase the value based off the return of the scanCallback
+    - there is an optional `startValue` which by default is 0
+    
+`.reduce(scanCallback[, startValue])` 
+
+ - does the same as `.scan` but only returns when the chained observable is complete and not on every new value
  
  `.toPromise()`
  
