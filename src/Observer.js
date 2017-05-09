@@ -16,6 +16,8 @@ export class Observer {
       this.onError = noop;
       this.onComplete = noop;
       this.dispose = noop;
+      
+      this.isComplete = true;
     })();
   }
   
