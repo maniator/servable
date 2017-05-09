@@ -5,7 +5,7 @@ const countObservable$ = Observable.interval(1000, 1);
 const countSubscription = countObservable$
   .take(10)
   .map((n) => n * 5)
-  .filter((n) => n > 10).concat(
+  .filter((n) => n > 10).combineLatest(
   countObservable$
     .take(5)
 )
