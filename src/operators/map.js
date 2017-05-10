@@ -7,6 +7,7 @@ export const map = function (source$, mapCallback) {
   });
 };
 
+Observable.map = map;
 Observable.prototype.map = function (mapCallback) {
   return map(this, mapCallback);
 };

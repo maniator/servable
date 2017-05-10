@@ -16,6 +16,7 @@ export const toPromise = function (source$) {
   });
 };
 
+Observable.toPromise = toPromise;
 Observable.prototype.toPromise = function () {
   return toPromise(this);
 };

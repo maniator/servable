@@ -20,6 +20,7 @@ export const min = function (source$) {
   });
 };
 
+Observable.min = min;
 Observable.prototype.min = function () {
   return min(this);
 };

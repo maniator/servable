@@ -21,6 +21,7 @@ export const average = function (source$) {
   });
 };
 
+Observable.average = average;
 Observable.prototype.average = function () {
   return average(this);
 };

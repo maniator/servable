@@ -27,6 +27,7 @@ export const switchMap = function (source$, mapCallback) {
   });
 };
 
+Observable.switchMap = switchMap;
 Observable.prototype.switchMap = function (mapCallback) {
   return switchMap(this, mapCallback);
 };

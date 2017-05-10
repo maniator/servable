@@ -9,6 +9,7 @@ export const filter = function (source$, mapCallback) {
   });
 };
 
+Observable.filter = filter;
 Observable.prototype.filter = function (filterCallback) {
   return filter(this, filterCallback);
 };

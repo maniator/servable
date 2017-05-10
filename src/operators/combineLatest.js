@@ -41,6 +41,7 @@ export const combineLatest = function (source$, otherSource$, combineCallback = 
   });
 };
 
+Observable.combineLatest = combineLatest;
 Observable.prototype.combineLatest = function (otherSource$, combineCallback) {
   return combineLatest(this, otherSource$, combineCallback);
 };

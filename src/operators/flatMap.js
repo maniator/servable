@@ -34,6 +34,7 @@ export const flatMap = function (source$, mapCallback) {
   });
 };
 
+Observable.flatMap = flatMap;
 Observable.prototype.flatMap = function (mapCallback) {
   return flatMap(this, mapCallback);
 };

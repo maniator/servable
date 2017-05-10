@@ -9,6 +9,7 @@ export const doStuff = function (source$, runCallback) {
   });
 };
 
+Observable.do = doStuff;
 Observable.prototype.do = function (runCallback) {
   return doStuff(this, runCallback);
 };
