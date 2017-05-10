@@ -1,7 +1,7 @@
-export * from './Observable';
 export * from './Subscription';
-export * from './Observer';
+export * from './Observable';
 export * from './Subject';
+export * from './Observer';
 
 export * from './utilities';
 
