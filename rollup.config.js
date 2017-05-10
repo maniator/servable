@@ -2,6 +2,7 @@ import buble from 'rollup-plugin-buble';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import sizes from 'rollup-plugin-sizes';
 import license from 'rollup-plugin-license';
+import globals from 'rollup-plugin-node-globals';
 
 const pkg = require('./package.json');
 
@@ -19,6 +20,7 @@ export default {
   plugins: [
     buble(),
     sizes(),
+    globals(),
     license({
       banner,
     }),
