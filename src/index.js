@@ -4,6 +4,7 @@ export * from './Subject';
 export * from './Observer';
 
 export * from './utilities';
+export * from './utilities/makeHot';
 
 // add on operators
 export * from './operators';
