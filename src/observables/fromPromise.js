@@ -7,7 +7,7 @@ export const fromPromise = function (promise) {
       promise.then(function (...values) {
         next(...values);
         complete();
-      }, error);
+      }, error).catch(error);
     } else {
       error('Passed an invalid object to fromPromise', promise);
     }

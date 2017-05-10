@@ -39,3 +39,13 @@ inputObservable$
 inputObservable$
   .do((text) => div.textContent = text)
   .subscribe();
+
+Observable
+  .ajax('../package.json')
+  .do(console.log.bind(console.log, 'response'))
+  .flatMap(response => Observable.fromPromise(response.json()))
+  .do(console.log.bind(console.log, 'value'))
+  .subscribe({
+    next: (value) => console.log(value),
+    error: (e) => console.warn(e, e.response)
+  });

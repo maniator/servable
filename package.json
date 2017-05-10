@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "build": "rimraf lib dist && buba src -o lib && rollup -c && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
     "watch": "rollup -c -w",
-    "release": "node release.js"
+    "release": "node release.js",
+    "server": "http-server"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/maniator/servable#readme",
   "devDependencies": {
     "buba": "^4.0.2",
+    "http-server": "^0.10.0",
     "inquirer": "^3.0.6",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6",
