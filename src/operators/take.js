@@ -18,6 +18,7 @@ export const take = function (source$, amount, filterCallback = () => true) {
   });
 };
 
+Observable.take = take;
 Observable.prototype.take = function (amount, filterCallback) {
   return take(this, amount, filterCallback);
 };

@@ -14,6 +14,7 @@ export const debounceTime = function (source$, time) {
   });
 };
 
+Observable.debounceTime = debounceTime;
 Observable.prototype.debounceTime = function (time) {
   return debounceTime(this, time);
 };

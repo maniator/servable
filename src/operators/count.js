@@ -19,6 +19,7 @@ export const count = function (source$, countCallback = (value) => true) {
   });
 };
 
+Observable.count = count;
 Observable.prototype.count = function (countCallback) {
   return count(this, countCallback);
 };
