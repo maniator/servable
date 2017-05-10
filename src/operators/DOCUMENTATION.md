@@ -1,4 +1,4 @@
-These methods called by doing: `observableInstance$.<pluginFunction>`
+These methods called by doing: `observableInstance$.<pluginFunction>` or by calling `Observable.<pluginFunction>(observableInstance$, ...arguments)`
 
 `.map(<mapCallback>)` 
 
