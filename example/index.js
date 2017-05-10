@@ -6,10 +6,10 @@ const countSubscription = countObservable$
   .take(10)
   .map((n) => n * 5)
   .filter((n) => n > 10)
-  .combineLatest(
+  .combineLatest([
     countObservable$
       .take(5)
-  )
+  ])
   .subscribe({
     next (number) {
       console.log('NEXT NUMBER: ', number);

@@ -2,27 +2,30 @@ import { Observable } from '../Observable';
 
 const nullHash = void(0);
 
-export const combineLatest = function (source$, otherSource$, combineCallback = (x, y) => [x, y]) {
+export const combineLatest = function (sources$, combineCallback = ((...args) => [...args])) {
   return new Observable(function ({ next, error, complete }) {
-    let sourceSubscription;
-    let otherSubscription;
+    let subscriptions = [];
     
-    let latest = [ nullHash, nullHash ];
+    let latest = sources$.map(s$ => nullHash);
     
+    let allHasValue = false;
+    const checkAllHasValue = () => latest.filter((l) => l == nullHash).length <= 0;
     const onComplete = () => {
-      if (sourceSubscription && otherSubscription) {
-        if (sourceSubscription.isComplete && otherSubscription.isComplete) {
-          complete();
-        }
+      const allComplete = subscriptions.filter((s) => !s.isComplete).length <= 0;
+      
+      if (allComplete) {
+        complete();
       }
     };
     
-    const subscribeTo = (obs$, index, otherIndex) => {
+    const subscribeTo = (obs$, index) => {
       return obs$.subscribe({
         next (value) {
           latest[index] = value;
+  
+          allHasValue = allHasValue || checkAllHasValue();
           
-          if (latest[otherIndex] !== nullHash) {
+          if (allHasValue) {
             next(combineCallback(...latest));
           }
         },
@@ -30,18 +33,14 @@ export const combineLatest = function (source$, otherSource$, combineCallback = 
         complete: onComplete,
       });
     };
+  
+    subscriptions = sources$.map((s$, index) => subscribeTo(s$, index));
     
-    sourceSubscription = subscribeTo(source$, 0, 1);
-    otherSubscription = subscribeTo(otherSource$, 1, 0);
-    
-    return () => {
-      sourceSubscription.unsubscribe();
-      otherSubscription.unsubscribe();
-    };
+    return () => subscriptions.forEach((s) => s.unsubscribe());
   });
 };
 
 Observable.combineLatest = combineLatest;
-Observable.prototype.combineLatest = function (otherSource$, combineCallback) {
-  return combineLatest(this, otherSource$, combineCallback);
+Observable.prototype.combineLatest = function (otherSources$, combineCallback) {
+  return combineLatest([this, ...otherSources$], combineCallback);
 };
