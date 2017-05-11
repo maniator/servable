@@ -1,15 +1,16 @@
 const { Observable } = Servable;
 
 const countObservable$ = Observable.interval(1000, 1);
+const countObservable2$ = Observable.interval(500, 5);
 
-const countSubscription = countObservable$
-  .take(10)
-  .map((n) => n * 5)
-  .filter((n) => n > 10)
-  .combineLatest([
-    countObservable$
-      .take(5)
+const countSubscription =
+  Observable.zip([
+    countObservable$.take(4),
+    countObservable2$.take(7),
+    countObservable$.take(10),
+    countObservable2$.take(7),
   ])
+// countObservable2$.take(5)
   .subscribe({
     next (number) {
       console.log('NEXT NUMBER: ', number);
@@ -20,7 +21,7 @@ const countSubscription = countObservable$
     },
 
     complete () {
-      console.log('I AM COMPLETE');
+      console.trace('I AM COMPLETE');
     }
   });
 
