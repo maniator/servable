@@ -21,7 +21,7 @@ const countSubscription =
     },
 
     complete () {
-      console.log('I AM COMPLETE');
+      console.trace('I AM COMPLETE');
     }
   });
 

@@ -1,17 +1,11 @@
 import { Observable } from '../Observable';
+import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 export const merge = function (sources$) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];
     
-    const onComplete = () => {
-      const allComplete = subscriptions.filter((s) => !s.isComplete).length <= 0;
-      
-      if (allComplete) {
-        complete();
-      }
-    };
-    
+    const onComplete = onSubscriptionsComplete(subscriptions, complete);
     const subscribeTo = (obs$) => {
       return obs$.subscribe({
         next,
