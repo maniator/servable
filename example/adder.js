@@ -22,7 +22,7 @@ const main = () => {
   const y = fromEvent('input', yInput).map(toNumber);
   
   // result is the live current value of adding x and y
-  const result = combine(x, y, add);
+  const result = combine([x, y], add);
   
   // Observe the result value by rendering it to the resultNode
   result.subscribe(renderResult);
