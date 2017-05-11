@@ -12,7 +12,7 @@ export * from './operators/merge';
 export * from './operators/scan';
 export * from './operators/reduce';
 export * from './operators/concat';
-export * from './operators/combineLatest';
+export * from './operators/combine';
 export * from './operators/count';
 export * from './operators/sum';
 export * from './operators/max';

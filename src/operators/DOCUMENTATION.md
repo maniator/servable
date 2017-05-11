@@ -75,7 +75,7 @@ These methods called by doing: `observableInstance$.<pluginFunction>`
 
 - will run any number of observables in order and will only complete when the last one is done
 
-`.combineLatest(otherSources$[, combineCallback])`
+`.combine(otherSources$[, combineCallback])`
 
 - will multiple observables at the same time
     - will only call the observer's next function when all observables have emitted at least one value 

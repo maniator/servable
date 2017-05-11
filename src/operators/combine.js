@@ -3,7 +3,7 @@ import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 const nullHash = void(0);
 
-export const combineLatest = function (sources$, combineCallback = ((...args) => [...args])) {
+export const combine = function (sources$, combineCallback = ((...args) => [...args])) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];
     
@@ -35,7 +35,7 @@ export const combineLatest = function (sources$, combineCallback = ((...args) =>
   });
 };
 
-Observable.combineLatest = combineLatest;
-Observable.prototype.combineLatest = function (otherSources$, combineCallback) {
-  return combineLatest([this, ...otherSources$], combineCallback);
+Observable.combine = combine;
+Observable.prototype.combine = function (otherSources$, combineCallback) {
+  return combine([this, ...otherSources$], combineCallback);
 };
