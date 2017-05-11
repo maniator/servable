@@ -5,7 +5,7 @@ export const merge = function (sources$) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];
     
-    const onComplete = onSubscriptionsComplete(subscriptions, complete);
+    const onComplete = () => onSubscriptionsComplete(subscriptions, complete);
     const subscribeTo = (obs$) => {
       return obs$.subscribe({
         next,

@@ -1,16 +1,16 @@
 const { Observable } = Servable;
 
 const countObservable$ = Observable.interval(1000, 1);
+const countObservable2$ = Observable.interval(500, 5);
 
 const countSubscription =
-  Observable.merge([
-    countObservable$
-      .take(10)
-      .map((n) => n * 5)
-      .filter((n) => n > 10),
-    countObservable$.take(5).delay(100),
-    countObservable$.take(10).map(v => v * 13).delay(200),
+  Observable.zip([
+    countObservable$.take(4),
+    countObservable2$.take(7),
+    countObservable$.take(10),
+    countObservable2$.take(7),
   ])
+// countObservable2$.take(5)
   .subscribe({
     next (number) {
       console.log('NEXT NUMBER: ', number);

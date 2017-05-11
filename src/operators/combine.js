@@ -12,7 +12,7 @@ export const combine = function (sources$, combineCallback = ((...args) => [...a
     let allHasValue = false;
     const checkAllHasValue = () => latest.filter((l) => l == nullHash).length <= 0;
     
-    const onComplete = onSubscriptionsComplete(subscriptions, complete);
+    const onComplete = () => onSubscriptionsComplete(subscriptions, complete);
     const subscribeTo = (obs$, index) => {
       return obs$.subscribe({
         next (value) {
