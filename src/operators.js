@@ -8,6 +8,7 @@ export * from './operators/first';
 export * from './operators/toPromise';
 export * from './operators/flatMap';
 export * from './operators/switchMap';
+export * from './operators/merge';
 export * from './operators/scan';
 export * from './operators/reduce';
 export * from './operators/concat';
