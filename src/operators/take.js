@@ -7,7 +7,7 @@ export const take = function (source$, amount, filterCallback = () => true) {
   return passThroughNext(source$, function ({ next, complete }, value) {
     const isComplete = taken.length === amount;
   
-    if (filterCallback(value) && !isComplete) {
+    if (!isComplete && filterCallback(value)) {
       taken.push(value);
       next(value);
     }
