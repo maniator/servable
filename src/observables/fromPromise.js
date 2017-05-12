@@ -4,8 +4,8 @@ import { isPromise } from '../utilities';
 export const fromPromise = function (promise) {
   return new Observable(function ({ next, complete, error }) {
     if (isPromise(promise)) {
-      promise.then(function (...values) {
-        next(...values);
+      promise.then(function (values) {
+        next(values);
         complete();
       }, error).catch(error);
     } else {

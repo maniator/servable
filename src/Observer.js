@@ -36,7 +36,7 @@ export class Observer {
   use (callback) {
     return this.catchErrors(() => {
       const response = callback({
-        next: (...args) => this.onNext(...args),
+        next: (value) => this.onNext(value),
         error: (...errors) => this.onError(...errors),
         complete: () => this.onComplete(),
       });
@@ -57,9 +57,9 @@ export class Observer {
       return this.setupObserver(next);
     }
   
-    this.onNext = this.catchErrors((...args) => {
+    this.onNext = this.catchErrors((value) => {
       if (!this.isComplete) {
-        return next(...args);
+        return next(value);
       }
     });
   

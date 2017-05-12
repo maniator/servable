@@ -1,13 +1,13 @@
 const { Observable } = Servable;
 
-const countObservable$ = Observable.interval(1000, 1);
+const countObservable$ = Observable.interval(1000, 1).take(4);
 const countObservable2$ = Observable.interval(500, 5);
 
 const countSubscription =
   Observable.zip([
-    countObservable$.take(4),
+    countObservable$,
     countObservable2$.take(7),
-    countObservable$.take(10),
+    countObservable$,
     countObservable2$.take(7),
   ])
 // countObservable2$.take(5)
