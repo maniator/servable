@@ -1,6 +1,6 @@
 {
   "name": "servable",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "From scratch observable",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",

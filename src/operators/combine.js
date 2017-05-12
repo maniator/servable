@@ -3,7 +3,8 @@ import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 const nullHash = void(0);
 
-export const combine = function (sources$, combineCallback = ((...args) => [...args])) {
+const argsCallback = function () { return Array.from(arguments); }
+export const combine = function (sources$, combineCallback = argsCallback) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];
     
