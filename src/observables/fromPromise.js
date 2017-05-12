@@ -4,10 +4,10 @@ import { isPromise } from '../utilities';
 export const fromPromise = function (promise) {
   return new Observable(function ({ next, complete, error }) {
     if (isPromise(promise)) {
-      promise.then(function (...values) {
-        next(...values);
+      promise.then(function (values) {
+        next(values);
         complete();
-      }, error);
+      }, error).catch(error);
     } else {
       error('Passed an invalid object to fromPromise', promise);
     }

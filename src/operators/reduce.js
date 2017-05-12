@@ -19,6 +19,7 @@ export const reduce = function (source$, scanCallback, startValue = 0) {
   });
 };
 
+Observable.reduce = reduce;
 Observable.prototype.reduce = function (scanCallback, startValue) {
   return reduce(this, scanCallback, startValue);
 };

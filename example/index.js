@@ -1,15 +1,16 @@
 const { Observable } = Servable;
 
-const countObservable$ = Observable.interval(1000, 1);
+const countObservable$ = Observable.interval(1000, 1).take(4);
+const countObservable2$ = Observable.interval(500, 5);
 
-const countSubscription = countObservable$
-  .take(10)
-  .map((n) => n * 5)
-  .filter((n) => n > 10)
-  .combineLatest(
-    countObservable$
-      .take(5)
-  )
+const countSubscription =
+  Observable.zip([
+    countObservable$,
+    countObservable2$.take(7),
+    countObservable$,
+    countObservable2$.take(7),
+  ])
+// countObservable2$.take(5)
   .subscribe({
     next (number) {
       console.log('NEXT NUMBER: ', number);
@@ -20,7 +21,7 @@ const countSubscription = countObservable$
     },
 
     complete () {
-      console.log('I AM COMPLETE');
+      console.trace('I AM COMPLETE');
     }
   });
 
@@ -39,3 +40,13 @@ inputObservable$
 inputObservable$
   .do((text) => div.textContent = text)
   .subscribe();
+
+Observable
+  .ajax('../package.json')
+  .do(console.log.bind(console.log, 'response'))
+  .flatMap(response => Observable.fromPromise(response.json()))
+  .do(console.log.bind(console.log, 'value'))
+  .subscribe({
+    next: (value) => console.log(value),
+    error: (e) => console.warn(e, e.response)
+  });

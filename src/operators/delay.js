@@ -16,6 +16,7 @@ export const delay = function (source$, time) {
   });
 };
 
+Observable.delay = delay;
 Observable.prototype.delay = function (time) {
   return delay(this, time);
 };

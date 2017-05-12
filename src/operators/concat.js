@@ -39,6 +39,7 @@ export const concat = function (source$, nextSource$, ...otherSources$) {
   });
 };
 
+Observable.concat = concat;
 Observable.prototype.concat = function (...args$) {
   return concat(this, ...args$);
 };

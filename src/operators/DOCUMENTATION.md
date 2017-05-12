@@ -1,4 +1,4 @@
-These methods called by doing: `observableInstance$.<pluginFunction>`
+These methods called by doing: `observableInstance$.<pluginFunction>` or by calling `Observable.<pluginFunction>(observableInstance$, ...arguments)`
 
 `.map(<mapCallback>)` 
 
@@ -75,7 +75,7 @@ These methods called by doing: `observableInstance$.<pluginFunction>`
 
 - will run any number of observables in order and will only complete when the last one is done
 
-`.combineLatest(otherSource$[, combineCallback])`
+`.combine(otherSources$[, combineCallback])`
 
-- will run two observables at the same time
-    - will only call the observer's next function when both observables have emitted at least one value 
+- will multiple observables at the same time
+    - will only call the observer's next function when all observables have emitted at least one value 

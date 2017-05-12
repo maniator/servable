@@ -1,21 +1,20 @@
 import { Observable } from '../Observable';
 import { passThroughNextObservable } from './passThroughNextObservable';
+import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 export const flatMap = function (source$, mapCallback) {
   return new Observable((observer) => {
     let subscription = { isComplete: false };
     const nextSubscriptionList = [];
-    const onComplete = () => {
-      const nextComplete = nextSubscriptionList.reduce(
-        (curr, sub) => curr && sub.isComplete,
-        true
-      );
-      
-      if (subscription.complete && nextComplete) {
-        observer.complete();
-      }
-    };
     
+    const onComplete = () => {
+      const _onComplete = onSubscriptionsComplete(
+        [subscription, ...nextSubscriptionList],
+        observer.complete
+      );
+  
+      return _onComplete();
+    };
     subscription = passThroughNextObservable(source$, mapCallback)
       .subscribe((nextValue$) => {
         const nextSubscription = nextValue$.subscribe(
@@ -34,6 +33,7 @@ export const flatMap = function (source$, mapCallback) {
   });
 };
 
+Observable.flatMap = flatMap;
 Observable.prototype.flatMap = function (mapCallback) {
   return flatMap(this, mapCallback);
 };

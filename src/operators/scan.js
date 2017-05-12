@@ -18,6 +18,7 @@ export const scan = function (source$, scanCallback, startValue = 0) {
   });
 };
 
+Observable.scan = scan;
 Observable.prototype.scan = function (scanCallback, startValue) {
   return scan(this, scanCallback, startValue);
 };

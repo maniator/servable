@@ -20,6 +20,7 @@ export const max = function (source$) {
   });
 };
 
+Observable.max = max;
 Observable.prototype.max = function () {
   return max(this);
 };

@@ -1,5 +1,10 @@
 These methods are called by doing: `Observable.<observableFunction>`
 
+`.ajax(url[, options])`
+
+- an observable wrapper around the `fetch` API
+    - you can add a shim like [this one](https://github.com/github/fetch) if your environment does not have the fetch api
+
 `.fromEvent(<eventName>, <element>[, <mapCallback>)`
 
 - will create an observable that will listen for an event on a DOM element

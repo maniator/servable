@@ -44,9 +44,9 @@ export class Subject {
     return this;
   }
   
-  next (...args) {
+  next (value) {
     this.cleanup((observer) => {
-        observer.onNext(...args);
+        observer.onNext(value);
     });
   }
   
