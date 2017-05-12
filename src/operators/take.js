@@ -19,7 +19,7 @@ export const take = function (source$, amount, filterCallback = () => true) {
     }).subscribe(observer);
     
     return () => subscription.unsubscribe();
-  })
+  });
 };
 
 Observable.take = take;
