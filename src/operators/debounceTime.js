@@ -4,10 +4,10 @@ import { passThroughNext } from './passThroughNext';
 export const debounceTime = function (source$, time) {
   let timerId;
   
-  return passThroughNext(source$, function ({ next }, ...args) {
+  return passThroughNext(source$, function ({ next }, value) {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
-      next(...args);
+      next(value);
     }, time);
   }, function () {
     clearTimeout(timerId);

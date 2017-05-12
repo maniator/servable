@@ -4,12 +4,12 @@ import { passThroughNext } from './passThroughNext';
 export const take = function (source$, amount, filterCallback = () => true) {
   const taken = [];
   
-  return passThroughNext(source$, function ({ next, complete }, ...args) {
+  return passThroughNext(source$, function ({ next, complete }, value) {
     const isComplete = taken.length === amount;
   
-    if (filterCallback(...args) && !isComplete) {
-      taken.push([...args]);
-      next(...args);
+    if (filterCallback(value) && !isComplete) {
+      taken.push(value);
+      next(value);
     }
   
     if (isComplete) {
