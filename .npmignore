@@ -1,7 +1,9 @@
 .idea
 npm-debug.log
 node_modules
-example
 config
 release.js
-src
+_config.yml
+.npmignore
+.gitignore
+rollup.config.js
