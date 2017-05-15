@@ -1,5 +1,6 @@
 import { Observable } from '../Observable';
 import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
+import { addToString } from '../utilities';
 
 const startIndex = {
   values: [],
@@ -8,7 +9,7 @@ const startIndex = {
 
 const argsCallback = function () { return Array.from(arguments); }
 export const zip = function (sources$, combineCallback = argsCallback) {
-  return new Observable(function ({ next, error, complete }) {
+  return addToString(new Observable(function ({ next, error, complete }) {
     let subscriptions = [];
     
     let latest = sources$.map(s$ => JSON.parse(JSON.stringify(startIndex)));
@@ -47,7 +48,7 @@ export const zip = function (sources$, combineCallback = argsCallback) {
     subscriptions = sources$.map((s$, index) => subscribeTo(s$, index));
     
     return () => subscriptions.forEach((s) => s.unsubscribe());
-  });
+  }), 'zip');
 };
 
 Observable.zip = zip;

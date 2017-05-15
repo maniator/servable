@@ -1,8 +1,9 @@
 import { Observable } from '../Observable';
 import { passThroughNext } from './passThroughNext';
+import { addToString } from '../utilities';
 
 export const take = function (source$, amount, filterCallback = () => true) {
-  return new Observable (function (observer) {
+  return addToString(new Observable (function (observer) {
     const taken = [];
     
     const subscription = passThroughNext(source$, function ({ next, complete }, value) {
@@ -19,7 +20,7 @@ export const take = function (source$, amount, filterCallback = () => true) {
     }).subscribe(observer);
     
     return () => subscription.unsubscribe();
-  });
+  }), `take(${amount})`, source$);
 };
 
 Observable.take = take;

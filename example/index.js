@@ -5,11 +5,13 @@ const countObservable2$ = Observable.interval(500, 5);
 
 const countSubscription =
   Observable.zip([
-    countObservable$,
-    countObservable2$.take(7),
-    countObservable$,
-    countObservable2$.take(7),
-  ])
+    countObservable$.log(),
+    countObservable2$.take(7).log(),
+    countObservable$.log(),
+    countObservable2$.take(7).log(),
+  ], (...args) => args.reduce((a, b) => a + b, 0))
+    // .average()
+    .log()
 // countObservable2$.take(5)
   .subscribe({
     next (number) {
