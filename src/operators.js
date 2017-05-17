@@ -4,6 +4,7 @@ export * from './operators/delay';
 export * from './operators/do';
 export * from './operators/debounceTime';
 export * from './operators/take';
+export * from './operators/takeUntil';
 export * from './operators/first';
 export * from './operators/toPromise';
 export * from './operators/flatMap';
