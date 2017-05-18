@@ -6,15 +6,11 @@ export const flatMap = function (source$, mapCallback) {
   return new Observable((observer) => {
     let subscription = { isComplete: false };
     const nextSubscriptionList = [];
+    const onComplete = () => onSubscriptionsComplete(
+      [subscription, ...nextSubscriptionList],
+      observer.complete
+    );
     
-    const onComplete = () => {
-      const _onComplete = onSubscriptionsComplete(
-        [subscription, ...nextSubscriptionList],
-        observer.complete
-      );
-  
-      return _onComplete();
-    };
     subscription = passThroughNextObservable(source$, mapCallback)
       .subscribe((nextValue$) => {
         const nextSubscription = nextValue$.subscribe(

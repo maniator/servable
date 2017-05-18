@@ -48,5 +48,5 @@ Observable
   .do(console.log.bind(console.log, 'value'))
   .subscribe({
     next: (value) => console.log(value),
-    error: (e) => console.warn(e, e.response)
+    error: (e) => console.warn('ERROR', e, e.response)
   });

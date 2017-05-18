@@ -9,16 +9,16 @@ export class Observer {
   }
   
   cleanup () {
-    this.catchErrors(() => {
-      this.dispose();
+    this.dispose();
   
-      this.onNext = noop;
-      this.onError = noop;
-      this.onComplete = noop;
-      this.dispose = noop;
-      
-      this.isComplete = true;
-    })();
+    this.setupObserverObject = {
+      next: noop,
+      error: noop,
+      complete: noop,
+    };
+    this.dispose = noop;
+  
+    this.isComplete = true;
     
     return this;
   }
@@ -34,47 +34,61 @@ export class Observer {
   }
   
   use (callback) {
-    return this.catchErrors(() => {
-      const response = callback({
-        next: (value) => this.onNext(value),
-        error: (...errors) => this.onError(...errors),
-        complete: () => this.onComplete(),
-      });
-      
-      if (typeof response === 'function') {
-        this.dispose = response;
-      } else {
-        this.dispose = noop;
-      }
-      
-      return this.dispose;
-    })();
+    const callbackCatch = this.catchErrors(callback);
+    const response = callbackCatch({
+      next: (value) => this.onNext(value),
+      error: (...errors) => this.onError(...errors),
+      complete: () => this.onComplete(),
+    });
+    
+    if (typeof response === 'function') {
+      this.dispose = this.catchErrors(response);
+    } else {
+      this.dispose = noop;
+    }
+    
+    return this.dispose;
   }
   
-  setupObserver ({ next = noop, error = noop, complete = noop }) {
-    // assumes that an object was passed as first value to subscription
-    if (typeof next !== 'function' && typeof next === 'object') {
-      return this.setupObserver(next);
+  onNext (value) {
+    if (this.isComplete) {
+      return null;
+    }
+    
+    return this.setupObserverObject.next(value);
+  }
+  
+  onError (...errors) {
+    if (this.isComplete) {
+      return null;
     }
   
-    this.onNext = this.catchErrors((value) => {
-      if (!this.isComplete) {
-        return next(value);
-      }
-    });
+    return this.setupObserverObject.error(...errors);
+  }
   
-    this.onError = (...errors) => {
-      if (!this.isComplete) {
-        return error(...errors);
-      }
+  onComplete () {
+    if (this.isComplete) {
+      return null;
+    }
+    
+    this.cleanup();
+  
+    return this.setupObserverObject.complete();
+  }
+  
+  setupObserver (setupObserverObject = { next: noop, error: noop, complete: noop }) {
+    // assumes that an object was passed as first value to subscription
+    if (typeof setupObserverObject.next !== 'function' && typeof setupObserverObject.next === 'object') {
+      return this.setupObserver(setupObserverObject.next);
+    }
+    
+    const { next = noop, error = noop, complete = noop } = setupObserverObject;
+    
+    this.setupObserverObject = {
+      next: this.catchErrors(next),
+      error,
+      complete: this.catchErrors(complete),
     };
-  
-    this.onComplete = this.catchErrors(() => {
-      if (!this.isComplete) {
-        this.cleanup();
-        return complete();
-      }
-    });
   
     return this;
   }

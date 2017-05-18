@@ -16,7 +16,7 @@ function checkStatus (response) {
 export const ajax = function (...args) {
   return new Observable(function (observer) {
     if (global.fetch) {
-      const fetchPromise = fetch(...args).then(checkStatus);
+      const fetchPromise = fetch(...args).then(checkStatus).catch(observer.error);
       const subscription = fromPromise(fetchPromise).subscribe(observer);
   
       return () => subscription.unsubscribe();
