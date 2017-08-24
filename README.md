@@ -5,7 +5,9 @@ Servable is an implementation of a "simple" observable
 ## To install run:
 
 ```
-npm i servable --save
+npm i servable
+// or, if you're awesome
+yard add servable
 ```
 
 ---------
