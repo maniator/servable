@@ -7,7 +7,7 @@ Servable is an implementation of a "simple" observable
 ```
 npm i servable
 // or, if you're awesome
-yard add servable
+yarn add servable
 ```
 
 ---------
