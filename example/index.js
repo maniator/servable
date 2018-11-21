@@ -41,8 +41,18 @@ inputObservable$
 Observable
   .ajax('./package.json')
   .do(console.log.bind(console.log, 'response'))
-  .flatMap(response => Observable.fromPromise(response.json()))
-  .do(console.log.bind(console.log, 'value'))
+  .map(response => response.toJSON())
+  .do(console.log.bind(console.log, 'value'));
+
+const ajaxSubscription = ajaxCall$
+  .subscribe({
+    next: (value) => console.log(value),
+    error: (e) => console.warn('ERROR', e, e.response)
+  });
+
+ajaxSubscription.unsubscribe();
+
+ajaxCall$
   .subscribe({
     next: (value) => console.log(value),
     error: (e) => console.warn('ERROR', e, e.response)

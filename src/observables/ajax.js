@@ -1,28 +1,62 @@
 import { Observable } from '../Observable';
-import { fromPromise } from './fromPromise';
 
-function checkStatus (response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+/**
+ *
+ * @param {XMLHttpRequest} xhr
+ * @returns {*}
+ */
+function checkStatus (xhr) {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    return Object.assign(xhr, {
+      toJSON () {
+        return JSON.parse(xhr.responseText);
+      }
+    });
   } else {
-    var error = new Error(response.statusText);
-    error.response = response;
+    const error = new Error(xhr.statusText);
+
+    error.xhr = xhr;
+
     throw error;
   }
 }
 
-// do an ajax call (depends on the "fetch" api existing)
-// can add this shim to simulate fetch in all browsers https://github.com/github/fetch
-export const ajax = function (...args) {
+/**
+ * Make a cancellable XHR request
+ *
+ * @param {string} url
+ * @param {string} [method]
+ * @param {*} [requestData]
+ * @param {{name: string, value: string}[]} [headers]
+ *
+ * @returns {Observable}
+ */
+export const ajax = function (url, { method = 'GET', requestData = '', headers = [] } = {}) {
   return new Observable(function (observer) {
-    if (global.fetch) {
-      const fetchPromise = fetch(...args).then(checkStatus).catch(observer.error);
-      const subscription = fromPromise(fetchPromise).subscribe(observer);
-  
-      return () => subscription.unsubscribe();
-    } else {
-      throw new Error('Fetch API does not exist in your environment');
+    const xhr = new XMLHttpRequest();
+
+    function xhrStateChanged() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        try {
+          observer.next(checkStatus(xhr));
+        } catch (error) {
+          observer.error(error);
+        }
+        observer.complete();
+      }
     }
+
+    xhr.open(method, url);
+
+    headers.forEach(header => {
+      xhr.setRequestHeader(header.name, header.value);
+    });
+
+    xhr.onreadystatechange = xhrStateChanged;
+
+    xhr.send(JSON.stringify(requestData));
+
+    return () => xhr.abort();
   });
 };
 

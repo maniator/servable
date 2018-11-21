@@ -9,6 +9,8 @@ export class Observer {
   }
   
   cleanup () {
+    this.isComplete = true;
+
     this.dispose();
   
     this.setupObserverObject = {
@@ -17,8 +19,6 @@ export class Observer {
       complete: noop,
     };
     this.dispose = noop;
-  
-    this.isComplete = true;
     
     return this;
   }
