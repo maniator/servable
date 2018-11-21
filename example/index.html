@@ -3,28 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Observables from Scratch</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
-<body>
-    <h3>Observable Example</h3>
-
-    <div id="myText">Type in input</div>
-    <div id="myTextReverse">Type in input</div>
-    <input id="myInput" value="Type in input" />
-
-    <div>
-        <form>
-            <h3>Adder</h3>
-            <input class="x"> + <input class="y"> = <span class="result"></span>
-        </form>
+<body class="container">
+    <div class="row">
+    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1><a href="//github.com/maniator/servable">servable Observable</a> examples</h1>
+    	</div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>Reverse text in an input</h3>
+                    <div id="myText">Type in input</div>
+                    <div id="myTextReverse">Type in input</div>
+                    <input class="form-control" id="myInput" value="Type in input" />
+                </div>
+            </div>
 
-    <div id="dragdrop">
-        <div id="parent" style="width:100%; height:200px; background-color:red">
-            <div id="widget" style="position:absolute;width:150px;background-color:blue;color:white">Drag me</div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>Adding two numbers</h3>
+                    <div class="form-group">
+                        <form class="form-inline">
+                            <input class="x form-control" /> + <input class="y form-control" /> = <span class="result"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>Drag and drop element</h3>
+                    <div id="widget" style="position: fixed; width: 150px; background-color: blue; color: white">Drag me</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>Log</h3>
+            <p id="log"></p>
         </div>
     </div>
 
     <script type="text/javascript" src="../dist/index.js"></script>
+    <script type="text/javascript" src="logger.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="adder.js"></script>
     <script type="text/javascript" src="dragdrop.js"></script>

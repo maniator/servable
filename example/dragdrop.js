@@ -1,4 +1,4 @@
-var parent = document.getElementById("parent");
+var parent = document.body;
 var widget = document.getElementById("widget");
 
 var mouseDowns$ = Servable.Observable.fromEvent("mousedown", widget);
