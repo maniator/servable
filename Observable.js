@@ -48,6 +48,36 @@ class Observable {
     }
   }
 
+static combineLatest ($obs1, $obs2, combineFunction) {
+  return new Observable(({ next }) => {
+    let value1 = null;
+    let value2 = null;
+
+    const unsub1 = $obs1.subscribe({
+      next(value) {
+        value1 = value;
+        next(combineFunction(value1, value2));
+      }
+    });
+
+    const unsub2 = $obs2.subscribe({
+      next(value) {
+        value2 = value;
+        next(combineFunction(value1, value2));
+      }
+    });
+
+    return () => {
+      unsub1();
+      unsub2();
+    };
+  });
+}
+
+  combineLatest (obs$, combineFunction) {
+    return Observable.combineLatest(this, obs$, combineFunction);
+  }
+
   map (mappingFn) {
     return new Observable(({ next }) => {
       const unsubscribe = this.subscribe({
