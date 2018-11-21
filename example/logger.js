@@ -2,10 +2,21 @@ function Logger (element) {
   this.element = element;
 }
 
-Logger.prototype = window.console;
+window.originalConsole = window.console;
+Logger.prototype = Object.keys(window.originalConsole).reduce((memo, consoleFn) => ({
+  ...memo,
+  [`_${consoleFn}`]: typeof window.originalConsole[consoleFn] === 'function' ? window.originalConsole[consoleFn].bind(window.originalConsole) : window.originalConsole[consoleFn],
+}), {});
 
 Logger.prototype.log = function () {
   const preTag = document.createElement('pre');
+
+  this._log.apply(this, arguments);
+
+  if (!this.element) {
+    this._error('No element set', this.element)
+  }
+
   this.element.appendChild(preTag);
 
   preTag.textContent = Array.from(arguments).map((arg) => JSON.stringify(arg)).join(', ');
@@ -27,6 +38,4 @@ Logger.prototype.error = function () {
   preTag.classList.add('bg-danger');
 };
 
-window.logger = new Logger(document.getElementById('log'));
-
-window.console = window.logger;
+window.console = new Logger(document.getElementById('log'));

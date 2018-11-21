@@ -38,12 +38,24 @@ inputObservable$
   .do((text) => div.textContent = text)
   .subscribe();
 
-Observable
-  .ajax('./package.json')
-  .do(console.log.bind(console.log, 'response'))
-  .flatMap(response => Observable.fromPromise(response.json()))
-  .do(console.log.bind(console.log, 'value'))
+const ajaxCall$ = Observable
+  .of('./package.json')
+  .do(fileName => console.log('Request ' + fileName))
+  .flatMap(fileName => Observable.ajax(fileName))
+  .map(response => response.toJSON())
+  .do(console.log.bind(console, 'Value of ./package.json: '));
+
+const ajaxSubscription = ajaxCall$
   .subscribe({
-    next: (value) => console.log(value),
+    next: () => console.log('Finished request to ./package.json'),
+    error: (e) => console.warn('ERROR', e, e.response)
+  });
+
+console.error('Cancel one request to package.json')
+ajaxSubscription.unsubscribe();
+
+ajaxCall$
+  .subscribe({
+    next: () => console.log('Finished request to ./package.json'),
     error: (e) => console.warn('ERROR', e, e.response)
   });
