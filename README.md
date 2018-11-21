@@ -2,6 +2,8 @@
 
 Servable is an implementation of a "simple" observable
 
+![](https://badgen.net/bundlephobia/minzip/servable)
+ 
 ## To install run:
 
 ```
