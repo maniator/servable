@@ -42,7 +42,7 @@ inputObservable$
   .subscribe();
 
 Observable
-  .ajax('../package.json')
+  .ajax('./package.json')
   .do(console.log.bind(console.log, 'response'))
   .flatMap(response => Observable.fromPromise(response.json()))
   .do(console.log.bind(console.log, 'value'))

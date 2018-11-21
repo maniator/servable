@@ -3,5 +3,7 @@ npm-debug.log
 node_modules
 dist
 lib
+example/package.json
+example/dist
 
 package-lock.json

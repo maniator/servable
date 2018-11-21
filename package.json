@@ -9,6 +9,7 @@
     "build": "rimraf lib dist && buba src -o lib && rollup -c && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
     "watch": "rollup -c -w",
     "release": "node release.js",
+    "exampleDemo": "yarn build && cp -R dist example/dist && cp package.json example/",
     "server": "http-server"
   },
   "engines": {
