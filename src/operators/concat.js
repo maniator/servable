@@ -1,6 +1,13 @@
 import { Observable } from '../Observable';
-import { reduce } from './reduce';
 
+/**
+ * Concatenate any number of observables together
+ *
+ * @param {Observable} source$
+ * @param {Observable} nextSource$
+ * @param {Observable[]} otherSources$
+ * @returns {Observable}
+ */
 export const concat = function (source$, nextSource$, ...otherSources$) {
   return new Observable(function ({ next, error, complete }) {
     let innerSubscription;
@@ -39,7 +46,16 @@ export const concat = function (source$, nextSource$, ...otherSources$) {
   });
 };
 
+/**
+ * @type {function(Observable, Observable, ...[Observable[]]): Observable}
+ */
 Observable.concat = concat;
+
+/**
+ * Concatenate any number of observables to this observable
+ * @param {Observable[]} args$
+ * @returns {Observable}
+ */
 Observable.prototype.concat = function (...args$) {
   return concat(this, ...args$);
 };

@@ -1,7 +1,7 @@
 import { Observable } from '../Observable';
 
 /**
- *
+ * @private
  * @param {XMLHttpRequest} xhr
  * @returns {*}
  */
@@ -60,4 +60,7 @@ export const ajax = function (url, { method = 'GET', requestData = '', headers =
   });
 };
 
+/**
+ * @type {function(string, {method?: string, requestData?: *, headers?: *[]}): Observable}
+ */
 Observable.ajax = ajax;

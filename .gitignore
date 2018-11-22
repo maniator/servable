@@ -5,5 +5,8 @@ dist
 lib
 example/package.json
 example/dist
+example/docs
+
+*.log
 
 package-lock.json
