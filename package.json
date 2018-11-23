@@ -10,9 +10,8 @@
     "watch": "yarn rollup -w",
     "rollup": "rollup -c",
     "release": "node release.js",
-    "exampleDemo": "yarn demo && yarn docs",
-    "demo": "yarn rollup -o example/dist/index.js && cp package.json example/",
-    "docs": "yarn documentation build src/** -f html -g -o example/docs",
+    "exampleDemo": "yarn build && yarn docs",
+    "docs": "yarn documentation build src/** -f html -g -o .",
     "server": "http-server"
   },
   "engines": {
