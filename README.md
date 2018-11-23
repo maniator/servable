@@ -14,4 +14,4 @@ npm i servable --save
 
 ### Documentation
 
-The documentation is available here: https://servable.netlify.com/docs/
+The documentation is available here: https://servable.netlify.com/
