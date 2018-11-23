@@ -45,29 +45,11 @@ inquirer.prompt(questions).then(function(answers) {
   console.log('')
 
   // run('npm test', dryRun) &&
-    bumpVersion('package.json', pkg, dryRun) &&
-    run('npm run build', dryRun) &&
-    run('git add .', dryRun) &&
-    run('git commit -m "' + newVerison + '"', dryRun) &&
-    run('git push', dryRun) &&
-    run('git tag -a ' + newVerison + ' -m "v' + newVerison + '"', dryRun) &&
+    run('yarn build', dryRun) &&
+    run(`npm version ${newVerison}`, dryRun) &&
     run('git push origin --tags', dryRun) &&
     run('npm publish', dryRun)
 });
-
-function bumpVersion(fileName, obj, dry) {
-  console.log('Bumping version in `' + fileName + '` to ' + obj.version)
-  if (!dry) {
-    try {
-      fs.writeFileSync(fileName, JSON.stringify(obj, null, '  ') + '\n')
-      console.log('... ok')
-    } catch (e) {
-      console.error(e)
-      return false
-    }
-  }
-  return true
-}
 
 function run(cmd, dry) {
   console.log('Running `' + cmd + '`')
