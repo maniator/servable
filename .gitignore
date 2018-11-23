@@ -5,9 +5,12 @@ dist
 lib
 .DS_Store
 
+index.html
+assets
+
 example/package.json
-example/dist
-example/docs
+
+docs
 
 *.log
 

@@ -5,14 +5,13 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "jest",
     "build": "rimraf lib dist && buba src -o lib && yarn rollup && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
     "watch": "yarn rollup -w",
     "rollup": "rollup -c",
     "release": "node release.js",
-    "exampleDemo": "yarn demo && yarn docs",
-    "demo": "yarn rollup -o example/dist/index.js && cp package.json example/",
-    "docs": "yarn documentation build src/** -f html -g -o example/docs",
+    "exampleDemo": "yarn build && yarn docs",
+    "docs": "yarn documentation build src/** -f html -g -o .",
     "server": "http-server"
   },
   "engines": {
@@ -34,6 +33,7 @@
     "documentation": "8.1.2",
     "http-server": "^0.10.0",
     "inquirer": "^3.0.6",
+    "jest": "23.6.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6",
     "rollup-plugin-buble": "^0.15.0",

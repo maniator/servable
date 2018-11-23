@@ -39,7 +39,7 @@ inputObservable$
   .subscribe();
 
 const ajaxCall$ = Observable
-  .of('./package.json')
+  .of('../package.json')
   .do(fileName => console.log('Request ' + fileName))
   .flatMap(fileName => Observable.ajax(fileName))
   .map(response => response.toJSON())
