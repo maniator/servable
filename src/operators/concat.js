@@ -46,16 +46,7 @@ export const concat = function (source$, nextSource$, ...otherSources$) {
   });
 };
 
-/**
- * @type {function(Observable, Observable, ...[Observable[]]): Observable}
- */
 Observable.concat = concat;
-
-/**
- * Concatenate any number of observables to this observable
- * @param {Observable[]} args$
- * @returns {Observable}
- */
 Observable.prototype.concat = function (...args$) {
   return concat(this, ...args$);
 };

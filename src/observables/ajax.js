@@ -60,7 +60,4 @@ export const ajax = function (url, { method = 'GET', requestData = '', headers =
   });
 };
 
-/**
- * @type {function(string, {method?: string, requestData?: *, headers?: *[]}): Observable}
- */
 Observable.ajax = ajax;

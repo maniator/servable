@@ -1,7 +1,14 @@
 import { Observable } from '../Observable';
 import { first } from './first';
 
-// to convert to a promise just take the first value that the observable emits and then complete
+/**
+ * Reverse of [`fromPromise`](#frompromise)
+ * <br />
+ * Converts an Observable to a promise, takes the first value and then completes
+ *
+ * @param {Observable} source$
+ * @returns {Promise<*>}
+ */
 export const toPromise = function (source$) {
   if (!global.Promise) {
     throw new Error('Promise does not exist in the current context');

@@ -1,7 +1,16 @@
 import { Observable } from '../Observable';
 import { scan } from './scan';
 
-export const reduce = function (source$, scanCallback, startValue = 0) {
+/**
+ * _Sort of_ the same way that Array.reduce works, it will concatenate all of the values
+ * passing through an Observable event stream with a given scanCallback
+ *
+ * @param {Observable} source$
+ * @param {Function} scanCallback
+ * @param {*} [startValue]
+ * @returns {Observable}
+ */
+export const reduce = function (source$, scanCallback, startValue) {
   return new Observable(function ({next, error, complete }) {
     let lastValue = 0;
     const subscription = scan(source$, scanCallback, startValue).subscribe({

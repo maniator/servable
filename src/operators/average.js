@@ -27,15 +27,7 @@ export const average = function (source$) {
   });
 };
 
-/**
- * @type {function(Observable): Observable}
- */
 Observable.average = average;
-
-/**
- * @see average
- * @returns {Observable}
- */
 Observable.prototype.average = function () {
   return average(this);
 };

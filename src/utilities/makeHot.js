@@ -31,10 +31,6 @@ export const makeHot = (cold$) => {
   });
 };
 
-/**
- * Makes any observable "hot"
- * @returns {Observable}
- */
 Observable.prototype.makeHot = function () {
   return makeHot(this);
 };

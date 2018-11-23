@@ -6,7 +6,13 @@ const startIndex = {
   indexAt: -1,
 };
 
-const argsCallback = function () { return Array.from(arguments); }
+const argsCallback = function () { return Array.from(arguments); };
+
+/**
+ * @param {Observable} sources$
+ * @param {Function} combineCallback
+ * @returns {Observable}
+ */
 export const zip = function (sources$, combineCallback = argsCallback) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];

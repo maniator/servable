@@ -1,6 +1,12 @@
 import { Observable } from '../Observable';
 import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
+/**
+ * Will merge any number of observables into one observable stream
+ *
+ * @param {Observable[]} sources$
+ * @returns {Observable}
+ */
 export const merge = function (sources$) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];

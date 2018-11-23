@@ -1,5 +1,11 @@
 import { Observable } from '../Observable';
 
+/**
+ * Will result in the minimum value passed to the observer then will complete
+ *
+ * @param source$
+ * @returns {Observable}
+ */
 export const min = function (source$) {
   return new Observable(function ({ next, error, complete }) {
     let minNumber;

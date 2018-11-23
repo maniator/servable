@@ -45,16 +45,7 @@ export const combine = function (sources$, combineCallback = argsCallback) {
   });
 };
 
-/**
- * @type {function(Observable[], Function=): Observable}
- */
 Observable.combine = combine;
-
-/**
- * @param {Observable[]} otherSources$
- * @param {Function} combineCallback
- * @returns {Observable}
- */
 Observable.prototype.combine = function (otherSources$, combineCallback) {
   return combine([this, ...otherSources$], combineCallback);
 };

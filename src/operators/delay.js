@@ -1,5 +1,12 @@
 import { Observable } from '../Observable';
 
+/**
+ * Will delay output from the observable until a specific time interval has passed
+ *
+ * @param {Observable} source$
+ * @param {Number} time amount of time in milliseconds
+ * @returns {Observable}
+ */
 export const delay = function (source$, time) {
   return new Observable((observer) => {
     let subscription;

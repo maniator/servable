@@ -1,5 +1,12 @@
 import { Observable } from '../Observable';
 
+/**
+ * Takes values from the `source$` until the `takeSource$` emits one value
+ *
+ * @param {Observable} source$
+ * @param {Observable} takeSource$
+ * @returns {Observable}
+ */
 export const takeUntil = function (source$, takeSource$) {
   return new Observable (function (observer) {
     const subscription = source$.subscribe(observer);

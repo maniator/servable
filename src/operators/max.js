@@ -1,5 +1,11 @@
 import { Observable } from '../Observable';
 
+/**
+ * Will result in the maximum value passed to the observer then will complete
+ *
+ * @param {Observable} source$
+ * @returns {Observable}
+ */
 export const max = function (source$) {
   return new Observable(function ({ next, error, complete }) {
     let maxNumber;
