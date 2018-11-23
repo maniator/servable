@@ -57,7 +57,7 @@ describe('Observable', () => {
     });
     obs$.subscribe({
       error(_error) {
-        expect(_error).toBe('error')
+        expect(_error).toBe(error)
       }
     });
   });
