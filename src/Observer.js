@@ -1,5 +1,7 @@
 import { noop } from './utilities';
-
+/**
+ * @param {{next: Function, error: Function, complete: Function}} observer
+ */
 export class Observer {
   constructor (observer = {}) {
     this.isComplete = false;
@@ -7,7 +9,12 @@ export class Observer {
     
     this.setupObserver(observer);
   }
-  
+
+  /**
+   * Cleans up and disposes of all events in the stream
+   *
+   * @returns {Observer}
+   */
   cleanup () {
     this.isComplete = true;
 
@@ -32,7 +39,11 @@ export class Observer {
       }
     };
   }
-  
+
+  /**
+   * @param {Function} callback
+   * @returns {Function}
+   */
   use (callback) {
     const callbackCatch = this.catchErrors(callback);
     const response = callbackCatch({

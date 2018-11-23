@@ -1,7 +1,7 @@
 import { Observable } from '../Observable';
 
 /**
- *
+ * @private
  * @param {XMLHttpRequest} xhr
  * @returns {*}
  */

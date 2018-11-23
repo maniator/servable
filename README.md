@@ -12,10 +12,6 @@ npm i servable --save
 
 ---------
 
-### There a few plugins that are available - each return a new Observable instance
+### Documentation
 
-- [Documentation on the plugin operators can be seen here](./src/operators/DOCUMENTATION.md)
-
-### There are also a few Observables that can be created from the Observable object itself
-
-- [Documentation on the observables can be seen here](./src/observables/DOCUMENTATION.md)
+The documentation is available here: https://servable.netlify.com/docs/

@@ -3,7 +3,16 @@ import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 const nullHash = void(0);
 
-const argsCallback = function () { return Array.from(arguments); }
+const argsCallback = function () { return Array.from(arguments); };
+
+/**
+ * combines multiple observables at the same time.
+ * it will only call the observer's next function when all observables have emitted at least one value
+ *
+ * @param {Observable[]} sources$
+ * @param {Function} combineCallback
+ * @returns {Observable}
+ */
 export const combine = function (sources$, combineCallback = argsCallback) {
   return new Observable(function ({ next, error, complete }) {
     let subscriptions = [];

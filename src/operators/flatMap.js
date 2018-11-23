@@ -2,6 +2,13 @@ import { Observable } from '../Observable';
 import { passThroughNextObservable } from './passThroughNextObservable';
 import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
+/**
+ * Same as `map(obs$, mapCallback)` but will take the value of the callback and turn it from an observable to a value
+ *
+ * @param {Observable} source$
+ * @param {Function} mapCallback
+ * @returns {Observable}
+ */
 export const flatMap = function (source$, mapCallback) {
   return new Observable((observer) => {
     let subscription = { isComplete: false };

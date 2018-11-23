@@ -1,6 +1,14 @@
 import { Observable } from '../Observable';
 import { passThroughNext } from './passThroughNext';
 
+/**
+ * Takes a number of values that satisfy the `filterCallback` then completes
+ *
+ * @param {Observable} source$
+ * @param {Number} amount
+ * @param {Function} [filterCallback]
+ * @returns {Observable}
+ */
 export const take = function (source$, amount, filterCallback = () => true) {
   return new Observable (function (observer) {
     const taken = [];

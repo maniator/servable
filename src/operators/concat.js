@@ -1,6 +1,13 @@
 import { Observable } from '../Observable';
-import { reduce } from './reduce';
 
+/**
+ * Concatenate any number of observables together
+ *
+ * @param {Observable} source$
+ * @param {Observable} nextSource$
+ * @param {Observable[]} otherSources$
+ * @returns {Observable}
+ */
 export const concat = function (source$, nextSource$, ...otherSources$) {
   return new Observable(function ({ next, error, complete }) {
     let innerSubscription;

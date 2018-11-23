@@ -1,9 +1,16 @@
 import { Observable } from '../Observable';
 import { passThroughNext } from './passThroughNext';
 
-export const filter = function (source$, mapCallback) {
+/**
+ * Will filter out values that you do not want to subscribe to
+ *
+ * @param {Observable} source$
+ * @param {Function} filterCallback
+ * @returns {Observable}
+ */
+export const filter = function (source$, filterCallback) {
   return passThroughNext(source$, function ({ next }, value) {
-    if(mapCallback(value)) {
+    if(filterCallback(value)) {
       next(value);
     }
   });

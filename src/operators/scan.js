@@ -1,6 +1,12 @@
 import { Observable } from '../Observable';
 
-export const scan = function (source$, scanCallback, startValue = 0) {
+/**
+ * @param {Observable} source$
+ * @param {Function} scanCallback
+ * @param {*} [startValue]
+ * @returns {Observable}
+ */
+export const scan = function (source$, scanCallback, startValue) {
   return new Observable(function ({ next, error, complete }) {
     let previousValue = startValue;
     

@@ -1,6 +1,15 @@
 import { Observable } from '../Observable';
 import { passThroughNextObservable } from './passThroughNextObservable';
 
+/**
+ * The value from the mapCallback is an observable and if another value comes through the previous observable is cancelled
+ * <br />
+ * This is useful for things like typeaheads where you dont want a request for every keypress
+ *
+ * @param {Observable} source$
+ * @param {Function} mapCallback
+ * @returns {Observable}
+ */
 export const switchMap = function (source$, mapCallback) {
   return new Observable((observer) => {
     let currentSubscription;

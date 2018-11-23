@@ -6,10 +6,13 @@
   "jsnext:main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "rimraf lib dist && buba src -o lib && rollup -c && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
-    "watch": "rollup -c -w",
+    "build": "rimraf lib dist && buba src -o lib && yarn rollup && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
+    "watch": "yarn rollup -w",
+    "rollup": "rollup -c",
     "release": "node release.js",
-    "exampleDemo": "yarn build && cp -R dist example/dist && cp package.json example/",
+    "exampleDemo": "yarn demo && yarn docs",
+    "demo": "yarn rollup -o example/dist/index.js && cp package.json example/",
+    "docs": "yarn documentation build src/** -f html -g -o example/docs",
     "server": "http-server"
   },
   "engines": {
@@ -28,6 +31,7 @@
   "homepage": "https://github.com/maniator/servable#readme",
   "devDependencies": {
     "buba": "^4.0.2",
+    "documentation": "8.1.2",
     "http-server": "^0.10.0",
     "inquirer": "^3.0.6",
     "rimraf": "^2.6.1",
