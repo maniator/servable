@@ -1,16 +1,14 @@
-var inquirer = require('inquirer')
-var semver = require('semver')
-var shell = require('shelljs')
-var fs = require('fs')
+const inquirer = require('inquirer')
+const semver = require('semver')
+const shell = require('shelljs')
+const pkg = require('./package.json')
 
-var pkg = require('./package.json')
+console.log('');
+console.log('Welcome to servable release utility!');
+console.log('----------------------------------------------------------------');
+console.log('');
 
-console.log('')
-console.log('Wellcome to servable release utility!')
-console.log('----------------------------------------------------------------')
-console.log('')
-
-var questions = [
+const questions = [
   {
     type: 'list',
     name: 'version',
@@ -28,38 +26,38 @@ var questions = [
     message: 'Do you want to release, or just see what would happen if you do?',
     choices: ['Just see', 'Release!'],
   },
-]
+];
 
 inquirer.prompt(questions).then(function(answers) {
-  var newVerison = answers.version
-  var dryRun = answers.dryRun === 'Just see'
+  const newVerison = answers.version
+  const dryRun = answers.dryRun === 'Just see';
 
-  pkg.version = newVerison
+  pkg.version = newVerison;
 
-  console.log('')
+  console.log('');
   if (dryRun) {
-    console.log('Ok, here is what would happen:')
+    console.log('Ok, here is what would happen:');
   } else {
-    console.log('Doing actual release:')
+    console.log('Doing actual release:');
   }
-  console.log('')
+  console.log('');
 
   // run('npm test', dryRun) &&
-    run('yarn build', dryRun) &&
-    run(`npm version ${newVerison}`, dryRun) &&
-    run('git push origin --tags', dryRun) &&
-    run('npm publish', dryRun)
+  run('yarn build', dryRun) &&
+  run(`npm version ${newVerison}`, dryRun) &&
+  run('git push origin --tags', dryRun) &&
+  run('npm publish', dryRun);
 });
 
 function run(cmd, dry) {
-  console.log('Running `' + cmd + '`')
+  console.log('Running `' + cmd + '`');
   if (!dry) {
     if (shell.exec(cmd, {silent: false}).code === 0) {
-      console.log('... ok')
+      console.log('... ok');
     } else {
-      console.error('... fail!')
-      return false
+      console.error('... fail!');
+      return false;
     }
   }
-  return true
+  return true;
 }
