@@ -11,9 +11,11 @@
     "rollup": "rollup -c",
     "release": "node release.js",
     "exampleDemo": "yarn build && yarn docs",
-    "docs": "yarn documentation build src/** -f html -g -o .",
+    "docs": "yarn documentation build src/** -f html --theme node_modules/clean-documentation-theme -o .",
+    "docs-watch": "yarn documentation serve src/** -f html --theme node_modules/clean-documentation-theme -w",
     "server": "http-server"
   },
+  "readme": "README.md",
   "engines": {
     "yarn": "1.10.1",
     "node": "8.9.0"
@@ -30,6 +32,7 @@
   "homepage": "https://github.com/maniator/servable#readme",
   "devDependencies": {
     "buba": "^4.0.2",
+    "clean-documentation-theme": "0.5.2",
     "documentation": "8.1.2",
     "http-server": "^0.10.0",
     "inquirer": "^3.0.6",
