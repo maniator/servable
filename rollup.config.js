@@ -1,4 +1,4 @@
-import buble from 'rollup-plugin-buble';
+import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import filesize from 'rollup-plugin-filesize';
 import license from 'rollup-plugin-license';
@@ -18,7 +18,9 @@ export default {
   moduleName: 'Servable',
   sourceMap: true,
   plugins: [
-    buble(),
+    babel({
+      exclude: 'node_modules/**'
+    }),
     filesize(),
     globals(),
     license({
