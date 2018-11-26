@@ -19,9 +19,10 @@ Logger.prototype.log = function () {
 
   this.element.appendChild(preTag);
 
-  preTag.textContent = Array.from(arguments).map((arg) => JSON.stringify(arg)).join(', ');
+  preTag.textContent = Array.from(arguments).map((arg) => JSON.stringify(arg, null, 2)).join(', ');
 
   preTag.classList.add('bg-info');
+  preTag.style.maxHeight = '25vh';
 
   return preTag;
 };
