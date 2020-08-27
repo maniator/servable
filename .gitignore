@@ -15,3 +15,5 @@ docs
 *.log
 
 package-lock.json
+
+coverage
