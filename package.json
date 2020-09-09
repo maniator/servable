@@ -11,7 +11,8 @@
     "watch": "yarn rollup -w",
     "rollup": "rollup -c",
     "release": "node release.js",
-    "exampleDemo": "yarn build && yarn docs",
+    "exampleDemo": "yarn build && yarn docs && yarn jsDocs",
+    "jsDocs": "jsdoc src/**/* -R ./README.md -d docs",
     "docs": "yarn documentation build src/** -f html -g -o .",
     "server": "http-server"
   },
@@ -37,6 +38,7 @@
     "http-server": "^0.10.0",
     "inquirer": "^3.0.6",
     "jest": "23.6.0",
+    "jsdoc": "3.5.5",
     "rimraf": "^2.6.1",
     "rollup": "0.41.6",
     "rollup-plugin-babel": "4.0.3",
