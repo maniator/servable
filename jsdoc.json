@@ -1,0 +1,63 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "include": [
+            "src/",
+            "./README.md"
+        ]
+    },
+    "plugins": ["plugins/markdown"],
+    "opts": {
+        "encoding": "utf8",
+        "template": "node_modules/docdash",
+        "destination": "./docs/",
+        "recurse": true,
+        "verbose": true
+    },
+    "markdown": {
+        "parser": "gfm",
+        "hardwrap": true,
+        "idInHeadings": true
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": true,
+            "includeDate": false,
+            "useLongnameInNav": true
+        }
+    },
+    "docdash": {
+        "static": true,
+        "sort": true,
+        "disqus": "",
+		"openGraph": {
+			"title": "Servable",
+			"type": "website",
+			"image": "https://naftali.lubin.dev/favicon-32x32.png?v=8a370ae67443a7fd96b71aff74147006",
+			"site_name": "Servable",
+			"url": "https://servable.serveside.dev/"
+		},
+		"meta": {
+			"title": "Servable",
+			"description": "From scratch observable.",
+			"keyword": "rx, rxjs, observable, es6"
+		},
+        "search": true,
+        "collapse": true,
+        "typedefs": true,
+        "removeQuotes": "none",
+        "scripts": [],
+        "menu":{
+            "Github repo":{
+                "href":"https://github.com/maniator/servable",
+                "target":"_blank",
+                "class":"menu-item",
+                "id":"repository"
+            }
+        }
+    }
+}

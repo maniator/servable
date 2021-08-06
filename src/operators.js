@@ -1,3 +1,7 @@
+/**
+ * @namespace operators
+ */
+
 export * from './operators/map';
 export * from './operators/filter';
 export * from './operators/delay';

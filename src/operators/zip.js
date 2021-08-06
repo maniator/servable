@@ -9,6 +9,8 @@ const startIndex = {
 const argsCallback = function () { return Array.from(arguments); };
 
 /**
+ * @memberof operators
+ * 
  * @param {Observable} sources$
  * @param {Function} combineCallback
  * @returns {Observable}

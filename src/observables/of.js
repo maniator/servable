@@ -2,8 +2,10 @@ import { Observable } from '../Observable';
 
 /**
  * Takes any number of arguments and outputs them in order in an Observable stream
- *
- * @param {*[]} args
+ * 
+ * @memberof observables
+ * 
+ * @param {Array.<*>} args
  * @returns {Observable}
  */
 export const of = function (...args) {

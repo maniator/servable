@@ -1,6 +1,8 @@
 import { Observable } from '../Observable';
 
 /**
+ * @memberof operators
+ * 
  * @param {Observable} source$
  * @param {Function} scanCallback
  * @param {*} [startValue]

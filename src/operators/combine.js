@@ -8,6 +8,8 @@ const argsCallback = function () { return Array.from(arguments); };
 /**
  * combines multiple observables at the same time.
  * it will only call the observer's next function when all observables have emitted at least one value
+ * 
+ * @memberof operators
  *
  * @param {Observable[]} sources$
  * @param {Function} combineCallback

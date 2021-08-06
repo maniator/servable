@@ -3,6 +3,8 @@ import { isPromise } from '../utilities';
 
 /**
  * Turns a promise into an observable that emits the value of the promise and then completes
+ * 
+ * @memberof observables
  *
  * @param {Promise} promise
  * @returns {Observable}

@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Takes an average of everything coming into the event stream until it completes
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @returns {Observable}

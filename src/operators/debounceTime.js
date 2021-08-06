@@ -4,6 +4,8 @@ import { passThroughNext } from './passThroughNext';
 /**
  * Debounces values that will be sent down the stream.
  * Will only output values if there has not been any new values in the past time interval passed
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Number} time amount of time in milliseconds

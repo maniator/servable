@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Takes values from the `source$` until the `takeSource$` emits one value
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Observable} takeSource$

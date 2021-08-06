@@ -3,6 +3,8 @@ import { passThroughNext } from './passThroughNext';
 
 /**
  * Will run some callback before passing the current value to the subscription
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} runCallback

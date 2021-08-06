@@ -5,6 +5,8 @@ import { first } from './first';
  * Reverse of [`fromPromise`](#frompromise)
  * <br />
  * Converts an Observable to a promise, takes the first value and then completes
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @returns {Promise<*>}

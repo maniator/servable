@@ -3,6 +3,8 @@ import { reduce } from './reduce';
 
 /**
  * Sums all the values of an observable upon completion
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  */

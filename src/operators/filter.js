@@ -3,6 +3,8 @@ import { passThroughNext } from './passThroughNext';
 
 /**
  * Will filter out values that you do not want to subscribe to
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} filterCallback

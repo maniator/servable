@@ -4,6 +4,8 @@ import { scan } from './scan';
 /**
  * _Sort of_ the same way that Array.reduce works, it will concatenate all of the values
  * passing through an Observable event stream with a given scanCallback
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} scanCallback

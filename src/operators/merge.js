@@ -3,6 +3,8 @@ import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 /**
  * Will merge any number of observables into one observable stream
+ * 
+ * @memberof operators
  *
  * @param {Observable[]} sources$
  * @returns {Observable}

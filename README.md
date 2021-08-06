@@ -2,7 +2,7 @@
 
 Servable is an implementation of a "simple" observable
 
-![](https://badgen.net/bundlephobia/minzip/servable)
+![](https://badgen.net/bundlephobia/minzip/@maniator/servable)
  
 ## To install run:
 
@@ -16,4 +16,4 @@ npm i @maniator/servable --save
 
 ### Documentation
 
-The documentation is available here: https://servable.netlify.com/
+The documentation is available here: https://servable.serveside.dev/

@@ -2,6 +2,7 @@ import { Observable } from '../Observable';
 
 /**
  * @private
+ * 
  * @param {XMLHttpRequest} xhr
  * @returns {*}
  */
@@ -23,11 +24,13 @@ function checkStatus (xhr) {
 
 /**
  * Make a cancellable XHR request
- *
+ * 
+ * @memberof observables
+ * 
  * @param {string} url
  * @param {string} [method]
  * @param {*} [requestData]
- * @param {{name: string, value: string}[]} [headers]
+ * @param {Array.<{name: string, value: string}>} [headers]
  *
  * @returns {Observable}
  */

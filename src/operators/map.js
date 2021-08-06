@@ -3,6 +3,8 @@ import { passThroughNext } from './passThroughNext';
 
 /**
  * Will map each value to a new value using the callback
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} mapCallback

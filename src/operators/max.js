@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Will result in the maximum value passed to the observer then will complete
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @returns {Observable}

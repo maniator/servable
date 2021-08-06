@@ -3,6 +3,8 @@ import { passThroughNext } from './passThroughNext';
 
 /**
  * Takes a number of values that satisfy the `filterCallback` then completes
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Number} amount

@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Output a range of numbers to an Observable stream
+ * 
+ * @memberof observables
  *
  * @param {Number} [start]
  * @param {Number} end

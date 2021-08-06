@@ -3,6 +3,8 @@ import { filter } from './filter';
 
 /**
  * Counts the number of values coming into the stream on complete
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} [countCallback] a function to use to filter out values that you do not wish to count

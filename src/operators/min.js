@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Will result in the minimum value passed to the observer then will complete
+ * 
+ * @memberof operators
  *
  * @param source$
  * @returns {Observable}

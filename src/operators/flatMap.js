@@ -4,6 +4,8 @@ import { onSubscriptionsComplete } from '../utilities/onSubscriptionsComplete';
 
 /**
  * Same as `map(obs$, mapCallback)` but will take the value of the callback and turn it from an observable to a value
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Function} mapCallback

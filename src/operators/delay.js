@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Will delay output from the observable until a specific time interval has passed
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Number} time amount of time in milliseconds

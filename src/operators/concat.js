@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Concatenate any number of observables together
+ * 
+ * @memberof operators
  *
  * @param {Observable} source$
  * @param {Observable} nextSource$

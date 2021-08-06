@@ -2,6 +2,8 @@ import { Observable } from '../Observable';
 
 /**
  * Creates an interval that will count on every interval tick
+ * 
+ * @memberof observables
  *
  * @param {Number} time in milliseconds to output the interval count
  * @param {Number} [start] number to start the interval count at

@@ -4,6 +4,8 @@ import { Subject } from '../Subject';
 /**
  * Makes an observable "hot" -- very useful for things like DOM event listeners
  * so that the events do not get bound numerous amounts of times
+ * 
+ * @memberof utilities
  *
  * @param {Observable} cold$
  * @returns {Observable}
