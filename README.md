@@ -6,8 +6,10 @@ Servable is an implementation of a "simple" observable
  
 ## To install run:
 
-```
-npm i servable --save
+```zsh
+yarn add @maniator/servable
+# or
+npm i @maniator/servable --save
 ```
 
 ---------
