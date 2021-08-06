@@ -1,42 +1,47 @@
-function Logger (element) {
-  this.element = element;
-}
-
-window.originalConsole = window.console;
-Logger.prototype = Object.keys(window.originalConsole).reduce((memo, consoleFn) => ({
-  ...memo,
-  [`_${consoleFn}`]: typeof window.originalConsole[consoleFn] === 'function' ? window.originalConsole[consoleFn].bind(window.originalConsole) : window.originalConsole[consoleFn],
-}), {});
-
-Logger.prototype.log = function () {
-  const preTag = document.createElement('pre');
-
-  this._log.apply(this, arguments);
-
-  if (!this.element) {
-    this._error('No element set', this.element)
+export class Logger {
+  constructor (elementSelector = '#log', logger = console) {
+    this.elementSelector = elementSelector;
+    this.logger = logger;
   }
 
-  this.element.appendChild(preTag);
+  get element () {
+    if (!this._element) {
+      this._element = document.querySelector(this.elementSelector);
+    }
 
-  preTag.textContent = Array.from(arguments).map((arg) => JSON.stringify(arg, null, 2)).join(', ');
+    return this._element;
+  }
 
-  preTag.classList.add('bg-info');
-  preTag.style.maxHeight = '25vh';
+  log(...args) {
+    const preTag = document.createElement('pre');
+  
+    this.logger.log.apply(this.logger, args);
+  
+    if (!this.element) {
+      this.logger.error.call(this.logger, 'No element set', this.element)
+    }
+  
+    this.element.appendChild(preTag);
+  
+    preTag.textContent = Array.from(args).map((arg) => JSON.stringify(arg, null, 2)).join(', ');
+  
+    preTag.classList.add('bg-info');
+    preTag.style.maxHeight = '25vh';
+  
+    return preTag;
+  }
 
-  return preTag;
-};
+  warn(...args) {
+    const preTag = this.log(...args);
+  
+    preTag.classList.add('bg-warning');
+  }
 
-Logger.prototype.warn = function () {
-  const preTag = this.log.apply(this, arguments);
+  error(...args) {
+    const preTag = this.log(...args);
+  
+    preTag.classList.add('bg-danger');
+  }
+}
 
-  preTag.classList.add('bg-warning');
-};
-
-Logger.prototype.error = function () {
-  const preTag = this.log.apply(this, arguments);
-
-  preTag.classList.add('bg-danger');
-};
-
-window.console = new Logger(document.getElementById('log'));
+export const logger = new Logger();

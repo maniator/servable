@@ -1,16 +1,17 @@
-var parent = document.body;
-var widget = document.getElementById("widget");
+import { Observable } from "../lib/index.js";
 
-var mouseDowns$ = Servable.Observable.fromEvent("mousedown", widget);
-var parentMouseMoves$ = Servable.Observable.fromEvent("mousemove", parent);
-var parentMouseUps$ = Servable.Observable.fromEvent("mouseup", parent);
+const parent = document.body;
+const widget = document.getElementById("widget");
 
-var drags$ = mouseDowns$
+const mouseDowns$ = Observable.fromEvent("mousedown", widget);
+const parentMouseMoves$ = Observable.fromEvent("mousemove", parent);
+const parentMouseUps$ = Observable.fromEvent("mouseup", parent);
+
+const drags$ = mouseDowns$
   .flatMap(() => parentMouseMoves$.takeUntil(parentMouseUps$))
   .do((e) => {
     widget.style.left = e.clientX + "px";
     widget.style.top = e.clientY + "px";
   });
 
-var subscription =
-  drags$.subscribe();
+const subscription = drags$.subscribe();

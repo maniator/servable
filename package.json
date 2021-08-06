@@ -3,53 +3,46 @@
   "version": "0.4.2",
   "description": "From scratch observable",
   "main": "lib/index.js",
-  "jsnext:main": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
-    "build": "rimraf lib dist && yarn build:lib && yarn rollup && uglifyjs dist/index.js -c \"warnings=false\" --comments -m -o dist/index.min.js --verbose",
-    "build:lib": "babel src --out-dir lib",
+    "prebuild": "rimraf dist lib",
+    "build": "yarn rollup",
     "watch": "yarn rollup -w",
     "rollup": "rollup -c",
     "release": "node release.js",
     "exampleDemo": "yarn build && yarn docs",
-    "docs": "yarn documentation build src/** -f html -g -o .",
-    "server": "http-server"
+    "predocs": "rimraf docs",
+    "docs": "documentation build src/** --format html --document-exported --theme node_modules/clean-documentation-theme -g -o docs",
+    "serve": "npx serve"
   },
-  "engines": {
-    "yarn": ">=1 <2",
-    "node": ">=10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maniator/servable.git"
-  },
-  "author": "Neal Lubin",
+  "author": "Naftali Lubin",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/maniator/servable/issues"
   },
   "homepage": "https://github.com/maniator/servable#readme",
-  "devDependencies": {
-    "@babel/cli": "7.1.5",
-    "@babel/core": "7.1.6",
-    "@babel/preset-env": "7.1.6",
-    "documentation": "9.0.0-alpha.1",
-    "http-server": "^0.10.0",
-    "inquirer": "^3.0.6",
-    "jest": "23.6.0",
-    "rimraf": "^2.6.1",
-    "rollup": "0.41.6",
-    "rollup-plugin-babel": "4.0.3",
-    "rollup-plugin-filesize": "^1.3.2",
-    "rollup-plugin-license": "^0.3.0",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-watch": "^3.2.2",
-    "semver": "^6.1.0",
-    "shelljs": "^0.8.3",
-    "uglify-js": "^3.0.3"
+  "engines": {
+    "node": ">=12"
   },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maniator/servable.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.14.8",
+    "@babel/core": "7.15.0",
+    "@babel/preset-env": "7.15.0",
+    "clean-documentation-theme": "^0.5.2",
+    "documentation": "13.2.5",
+    "inquirer": "^8.1.2",
+    "jest": "27.0.6",
+    "rimraf": "^3.0.2",
+    "rollup": "2.56.0",
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-filesize": "^9.1.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "semver": "^7.3.5",
+    "shelljs": "^0.8.3"
   }
 }

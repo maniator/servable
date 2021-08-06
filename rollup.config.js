@@ -1,33 +1,67 @@
 import babel from 'rollup-plugin-babel';
-import nodeResolve from 'rollup-plugin-node-resolve';
 import filesize from 'rollup-plugin-filesize';
-import license from 'rollup-plugin-license';
-import globals from 'rollup-plugin-node-globals';
+import {terser} from 'rollup-plugin-terser';
 
 const pkg = require('./package.json');
 
-const banner = `servable v${pkg.version}
-${pkg.homepage}
-@author ${pkg.author}
-@preserve`;
+const banner = `/**
+ * servable v${pkg.version}
+ * ${pkg.homepage}
+ * @author ${pkg.author}
+ * @preserve
+ */`;
 
-export default {
-  entry: 'src/index.js',
-  dest: 'dist/index.js',
-  format: 'umd',
-  moduleName: 'Servable',
-  sourceMap: true,
+const generalOptions = {
+  shimMissingExports: true,
+  treeshake: true,
   plugins: [
     babel({
       exclude: 'node_modules/**'
     }),
-    filesize(),
-    globals(),
-    license({
-      banner,
-    }),
-    nodeResolve({
-      jsnext: true
-    })
+    filesize()
   ]
+};
+
+const outputOptions = {
+  dir: 'dist',
+  amd: true,
+  name: 'Servable',
+  format: 'umd',
+  sourcemap: true,
+  globals: ["Promise"],
+  banner
 }
+
+export default [
+  {
+    input: {
+      index: 'src/index.js',
+    },
+    output: outputOptions,
+    ...generalOptions
+  },
+  {
+    input: {
+      'index.min': 'src/index.js',
+    },
+    output: {
+      ...outputOptions,
+      plugins: [terser()]
+    },
+    ...generalOptions,
+  },
+  {
+    input: {
+      index: 'src/index.js',
+    },
+    output: {
+      ...outputOptions,
+      dir: 'lib',
+      sourcemap: false,
+      format: 'es',
+      preserveModules: true,
+      preserveModulesRoot: 'src'
+    },
+    ...generalOptions,
+  }
+];

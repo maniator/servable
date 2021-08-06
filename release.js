@@ -42,9 +42,8 @@ inquirer.prompt(questions).then(function(answers) {
   }
   console.log('');
 
-  // run('npm test', dryRun) &&
-  run('yarn build', dryRun) &&
   run(`npm version ${newVerison}`, dryRun) &&
+  run('yarn build', dryRun) &&
   run('git push origin --tags', dryRun) &&
   run('npm publish', dryRun);
 });
