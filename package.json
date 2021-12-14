@@ -32,7 +32,7 @@
   "devDependencies": {
     "@babel/cli": "7.14.8",
     "@babel/core": "7.15.0",
-    "@babel/preset-env": "7.15.0",
+    "@babel/preset-env": "7.16.5",
     "docdash": "^1.2.0",
     "inquirer": "^8.1.2",
     "jest": "27.0.6",
