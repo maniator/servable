@@ -35,7 +35,7 @@
     "@babel/preset-env": "7.17.10",
     "docdash": "^1.2.0",
     "inquirer": "^8.1.2",
-    "jest": "28.0.3",
+    "jest": "28.1.0",
     "jsdoc": "^3.6.7",
     "rimraf": "^3.0.2",
     "rollup": "2.72.0",
